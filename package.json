@@ -1,32 +1,39 @@
 {
-  "name": "pera-swarm",
-  "version": "1.0.0",
-  "description": "A generalized, efficient, and flexible JavaScript library for creating swarm robotics simulators.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Pera-Swarm/pera-swarm.git"
-  },
-  "keywords": [
-    "Pera",
-    "Swarm",
-    "Pera-Swarm",
-    "Swarm",
-    "Robotics",
-    "Virtual",
-    "Robots",
-    "Simulator",
-    "Swarm",
-    "Robotic",
-    "Simulator"
-  ],
-  "author": "Pera-Swarm",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Pera-Swarm/pera-swarm/issues"
-  },
-  "homepage": "https://github.com/Pera-Swarm/pera-swarm#readme"
+    "name": "pera-swarm",
+    "version": "1.0.0",
+    "description": "A generalized, efficient, and flexible JavaScript library for creating swarm robotics simulators.",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "format": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml)\"",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Pera-Swarm/pera-swarm.git"
+    },
+    "keywords": [
+        "Pera",
+        "Swarm",
+        "Pera-Swarm",
+        "Swarm",
+        "Robotics",
+        "Virtual",
+        "Robots",
+        "Simulator",
+        "Swarm",
+        "Robotic",
+        "Simulator"
+    ],
+    "author": "Pera-Swarm",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Pera-Swarm/pera-swarm/issues"
+    },
+    "homepage": "https://github.com/Pera-Swarm/pera-swarm#readme",
+    "devDependencies": {
+        "prettier": "^2.2.0",
+        "typescript": "^4.1.2"
+    }
 }
