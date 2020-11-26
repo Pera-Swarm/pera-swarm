@@ -3,6 +3,11 @@
     "version": "1.0.0",
     "description": "A generalized, efficient, and flexible JavaScript library for creating swarm robotics simulators.",
     "main": "index.js",
+    "files": [ "lib", "index.js"],
+    "directories": {
+      "lib": "lib",
+      "test": "__test__"
+    },
     "scripts": {
         "build": "tsc",
         "dev": "tsc --watch",
