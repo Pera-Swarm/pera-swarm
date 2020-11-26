@@ -116,4 +116,4 @@ class Robot {
     };
 }
 
-export { Robot,RobotType };
+export { Robot, RobotType };
