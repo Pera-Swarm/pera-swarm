@@ -1,3 +1,3 @@
-export const test = () => {
-    console.log('this is a test function');
-};
+export * from './modules/coordinate';
+export * from './modules/sensor';
+export * from './modules/robot';
