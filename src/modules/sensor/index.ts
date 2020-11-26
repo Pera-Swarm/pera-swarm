@@ -93,4 +93,13 @@ const sensors = (id: number) => {
     };
 };
 
-export { sensors, Sensor, SensorType, SensorValueType, SensorArrayValueType };
+const sensorModuleTypes: string[] = ['color', 'distance'];
+
+export {
+    sensors,
+    Sensor,
+    SensorType,
+    SensorValueType,
+    SensorArrayValueType,
+    sensorModuleTypes
+};
