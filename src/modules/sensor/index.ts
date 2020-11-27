@@ -23,20 +23,29 @@ type ValueType =
 /**
  * @type SensorType
  */
-type SensorType = {
-    id: number;
-    values: ValueType;
+type SensorType<T> = {
+    id: T;
+    value: ValueType;
     updated: number;
     getReading: Function;
     setReading: Function;
 };
 
 /**
+ * @type SensorReadingType
+ */
+type SensorReadingType<T, TValueType> = {
+    id: T;
+    value: TValueType;
+    updated: number;
+};
+
+/**
  * @type SensorModuleType
  */
 type SensorModuleType = {
-    color: SensorType;
-    distance: SensorType;
+    color: SensorType<number>;
+    distance: SensorType<number>;
     updated: number;
 };
 
@@ -44,17 +53,19 @@ type SensorModuleType = {
  * @abstract
  * @class Sensor
  */
-abstract class Sensor {
-    protected _id: number;
-    protected _value: ValueType;
+abstract class Sensor<TId, TValueType = ValueType> {
+    protected _id: TId;
+    protected _value: TValueType;
     protected _updated: number;
 
-    constructor(id: number, value?: ValueType | undefined) {
+    constructor(id: TId, value?: TValueType) {
         this._id = id;
         if (value !== undefined) {
             this._value = value;
         } else {
-            this._value = 0;
+            throw new Error(
+                'Invalid argument. value argument must be one of number, number[] string or string[] types.'
+            );
         }
         this._updated = Date.now();
     }
@@ -65,7 +76,7 @@ abstract class Sensor {
     get id() {
         return this._id;
     }
-    
+
     /**
      * the coordinate updated
      */
@@ -74,17 +85,17 @@ abstract class Sensor {
     }
 
     /**
-     * @abstract sensor values
+     * @abstract sensor value
      */
-    abstract get values(): ValueType;
+    abstract get value(): ValueType;
 
     /**
      * method for getting sensor readings
      */
-    getReading(): SensorType {
+    getReading(): SensorReadingType<TId, TValueType> {
         return {
-            id: this.id,
-            value: this.values,
+            id: this._id,
+            value: this._value,
             updated: this._updated
         };
     }
@@ -92,9 +103,13 @@ abstract class Sensor {
     /**
      * method for setting sesnor readings
      */
-    setReading(value: ValueType) {
-        this._value = value;
-        this._updated = Date.now();
+    setReading(value: TValueType) {
+        if (value === undefined) {
+            throw new TypeError('value is not specified');
+        } else {
+            this._value = value;
+            this._updated = Date.now();
+        }
     }
 }
 
@@ -111,7 +126,10 @@ const sensors = (id: number) => {
     };
 };
 
-const sensorModuleTypes: string[] = ['color', 'distance'];
+enum sensorModuleTypes {
+    color,
+    distance
+}
 
 export {
     sensors,
@@ -119,6 +137,6 @@ export {
     SensorType,
     SensorValueType,
     SensorArrayValueType,
-    sensorModuleTypes,
-    SensorModuleType
+    SensorModuleType,
+    sensorModuleTypes
 };
