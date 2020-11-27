@@ -1,5 +1,6 @@
-import { Coordinate, CoordinateValueType, CoordinateType } from '../coordinate';
-import { sensors, sensorModuleTypes, SensorType } from '../sensor';
+import { Coordinate, CoordinateType, CoordinateValueType } from '../coordinate';
+import { SensorModuleType, sensorModuleTypes, sensors as newSensors } from '../sensor';
+import { Robot } from '.';
 
 /**
  * @type RobotType
@@ -8,47 +9,44 @@ type RobotType = {};
 
 /**
  * @class Robot Representation
- * @classdesc representing the specific robot level functionality
+ * @classdesc Virtual Robot Specific implementation
  */
-class Robot {
-    protected _id: number | string;
-    protected _coordinate: CoordinateType;
-    protected _sensors: SensorType;
+class VRobot extends Robot<
+    number,
+    CoordinateType<number>,
+    CoordinateValueType<number>,
+    SensorModuleType<number[], number>,
+    SensorModuleType<number[], number>
+> {
     protected _created: Date;
-    protected _updated: number;
     protected _timestamp: number;
 
     /**
      * Robot constructor
-     * @param {string} id robot id
-     * @param {number} heading heading coordinate
-     * @param {number} x x coordinate
-     * @param {number} y y coordinate
-     * @param {number} z z coordinate
+     * @param {number} id robot id
+     * @param {CoordinateType<number>} coordinates coordinates
+     * @param {TSensor} sensors sensor
      */
-    constructor(id: number | string, heading?: number, x?: number, y?: number) {
-        this._id = id;
-        // if (z !== undefined) {
-        //     this._z = z;
-        // }
-        this._coordinate = new Coordinate(
+    constructor(
+        id: number,
+        coordinates?: CoordinateType<number>,
+        sensors?: SensorModuleType<number[], number>
+    ) {
+        super(
             id,
-            heading === undefined ? 0 : heading,
-            x === undefined ? 0 : x,
-            y === undefined ? 0 : y
+            coordinates === undefined ? new Coordinate(id, 0, 0, 0) : coordinates,
+            sensors === undefined ? newSensors(id) : sensors
         );
-        this._sensors = sensors(id);
         this._created = new Date();
-        this._updated = Date.now();
         this._timestamp = Date.now();
     }
 
     /**
      * method for getting coordinates
-     * @returns {CoordinateValueType}
+     * @returns {CoordinateValueType<number>}
      */
-    get coordinates(): CoordinateValueType {
-        return this._coordinate.values;
+    get coordinates(): CoordinateValueType<number> {
+        return this._coordinates.values;
     }
 
     /**
@@ -60,10 +58,19 @@ class Robot {
      * @param {number} y y coordinate
      * @param {number} z z coordinate
      */
-    setCoordinates = (heading: number, x: number, y: number) => {
-        this._coordinate.setCoordinates(heading, x, y);
+    setCoordinates(coordinates: CoordinateValueType<number>): void {
+        const { heading, x, y } = coordinates;
+        this._coordinates.setCoordinates(heading, x, y);
         this._updated = Date.now();
-    };
+    }
+
+    get sensors(): SensorModuleType<number[], number> {
+        throw new Error('Method not implemented.');
+    }
+
+    setSensors(sensors: SensorModuleType<number[], number>): void {
+        throw new Error('Method not implemented.');
+    }
 
     /**
      * method for getting all the sensor readings
@@ -73,7 +80,7 @@ class Robot {
         var result = {};
         for (const key in this._sensors) {
             if (this._sensors.hasOwnProperty(key)) {
-                if (sensorModuleTypes.includes(key)) {
+                if (sensorModuleTypes.color === key) {
                     result[key] = this._sensors[key].getReading();
                 }
             }
@@ -93,27 +100,6 @@ class Robot {
             throw new TypeError('invalid sensor type');
         }
     };
-
-    /**
-     * method for updating the heartbeat of the robot
-     * @returns {Date} updated datetime value
-     */
-    updateHeartbeat = () => {
-        this._updated = Date.now();
-        return this._updated;
-    };
-
-    /**
-     * method for return the live status of the robot
-     * @param {number} interval the maximum allowed time in 'seconds' for being counted as 'alive' for a robot unit
-     * @returns {boolean} true : if the robot is counted as 'alive'
-     * @returns false : if the robot is counted as 'dead'
-     */
-    isAlive = (interval: number) => {
-        if (interval === undefined) throw new TypeError('interval unspecified');
-        const seconds = Math.floor((Date.now() - this._updated) / 1000);
-        return seconds <= interval;
-    };
 }
 
-export { Robot, RobotType };
+export { VRobot, RobotType };
