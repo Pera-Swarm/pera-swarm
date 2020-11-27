@@ -1,8 +1,8 @@
 /**
  * @type CoordinateValueType
  */
-type CoordinateValueType = {
-    id: number | string;
+type CoordinateValueType<TId> = {
+    id: TId;
     heading: number;
     x: number;
     y: number;
@@ -11,9 +11,9 @@ type CoordinateValueType = {
 /**
  * @type CoordinateType
  */
-type CoordinateType = {
-    id: number | string;
-    values: CoordinateValueType;
+type CoordinateType<TId> = {
+    id: TId;
+    values: CoordinateValueType<TId>;
     reset: Function;
     setCoordinates: Function;
 };
@@ -21,13 +21,13 @@ type CoordinateType = {
 /**
  * @class Coordinate
  */
-class Coordinate {
-    protected _id: number | string;
+class Coordinate<TId> {
+    protected _id: TId;
     protected _heading: number;
     protected _x: number;
     protected _y: number;
 
-    constructor(id: number | string, heading: number, x: number, y: number) {
+    constructor(id: TId, heading: number, x: number, y: number) {
         this._id = id;
         this._heading = heading;
         this._x = x;
@@ -37,14 +37,14 @@ class Coordinate {
     /**
      * the coordinate id
      */
-    get id() {
+    get id(): TId {
         return this._id;
     }
 
     /**
      * the coordinate values
      */
-    get values(): CoordinateValueType {
+    get values(): CoordinateValueType<TId> {
         return {
             id: this._id,
             heading: this._heading,
@@ -76,12 +76,17 @@ class Coordinate {
 }
 
 /**
+ * @type ValidityType
+ */
+type ValidityType = boolean | number;
+
+/**
  * method for validating a coordinate object.
  * returns true if valid or -1 if not.
  * @param {coordinate} coordinate
  */
-function validateCoordinate(coordinate: CoordinateType): boolean | number {
-    var validity: boolean | number;
+function validateCoordinate<TId>(coordinate: CoordinateType<TId>): ValidityType {
+    var validity: ValidityType;
     var i: number;
     validity = -1;
     i = 0;
@@ -103,7 +108,7 @@ function validateCoordinate(coordinate: CoordinateType): boolean | number {
     return validity;
 }
 
-abstract class CoordinateZ extends Coordinate {}
+abstract class CoordinateZ<TId> extends Coordinate<TId> {}
 
 export {
     Coordinate,
