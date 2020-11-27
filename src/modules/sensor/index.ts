@@ -50,6 +50,15 @@ type SensorModuleType<TColor, TDistance> = {
 };
 
 /**
+ * @type SensorsType
+ */
+type SensorsType =
+    | SensorModuleType<number, number>
+    | SensorModuleType<number[], number>
+    | SensorModuleType<string, number>
+    | SensorModuleType<string[], number>;
+
+/**
  * @abstract
  * @class Sensor
  */
@@ -117,7 +126,7 @@ abstract class Sensor<TId, TValueType = ValueType> {
  * method for creating the sensor array
  * @param {number} id robot id
  */
-function sensors(id: number): SensorModuleType<number, number> {
+function sensors(id: number): SensorsType {
     if (id === undefined) throw new TypeError('id unspecified');
     return {
         color: new ColorSensor(id),
@@ -135,6 +144,7 @@ export {
     sensors,
     Sensor,
     SensorType,
+    SensorsType,
     SensorValueType,
     SensorArrayValueType,
     SensorModuleType,
