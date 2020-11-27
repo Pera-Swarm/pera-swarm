@@ -17,13 +17,13 @@ type ColorSensorType = {
 /**
  * @class ColorSensor
  */
-class ColorSensor extends Sensor<number, ColorSensorValueType> {
+class ColorSensor<T> extends Sensor<T, ColorSensorValueType> {
     /**
      * ColorSensor constructor
-     * @param {number} id robot id
+     * @param {T} id robot id
      * @param {ColorSensorValueType} values color sensor values
      */
-    constructor(id: number, values?: ColorSensorValueType) {
+    constructor(id: T, values?: ColorSensorValueType) {
         super(id, values === undefined ? [0, 0, 0] : values);
     }
 

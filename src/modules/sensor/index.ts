@@ -43,9 +43,9 @@ type SensorReadingType<T, TValueType> = {
 /**
  * @type SensorModuleType
  */
-type SensorModuleType = {
-    color: SensorType<number>;
-    distance: SensorType<number>;
+type SensorModuleType<TColor, TDistance> = {
+    color: SensorType<TColor>;
+    distance: SensorType<TDistance>;
     updated: number;
 };
 
@@ -117,18 +117,18 @@ abstract class Sensor<TId, TValueType = ValueType> {
  * method for creating the sensor array
  * @param {number} id robot id
  */
-const sensors = (id: number) => {
+function sensors(id: number): SensorModuleType<number, number> {
     if (id === undefined) throw new TypeError('id unspecified');
     return {
         color: new ColorSensor(id),
         distance: new DistanceSensor(id),
         updated: Date.now()
     };
-};
+}
 
 enum sensorModuleTypes {
-    color,
-    distance
+    color = 'color',
+    distance = 'distance'
 }
 
 export {
