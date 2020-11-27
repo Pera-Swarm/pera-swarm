@@ -25,7 +25,18 @@ type ValueType =
  */
 type SensorType = {
     id: number;
-    value: ValueType;
+    values: ValueType;
+    updated: number;
+    getReading: Function;
+    setReading: Function;
+};
+
+/**
+ * @type SensorModuleType
+ */
+type SensorModuleType = {
+    color: SensorType;
+    distance: SensorType;
     updated: number;
 };
 
@@ -52,6 +63,13 @@ abstract class Sensor {
      * the coordinate id
      */
     get id() {
+        return this._id;
+    }
+    
+    /**
+     * the coordinate updated
+     */
+    get updated() {
         return this._id;
     }
 
@@ -89,7 +107,7 @@ const sensors = (id: number) => {
     return {
         color: new ColorSensor(id),
         distance: new DistanceSensor(id),
-        updated: new Date()
+        updated: Date.now()
     };
 };
 
@@ -101,5 +119,6 @@ export {
     SensorType,
     SensorValueType,
     SensorArrayValueType,
-    sensorModuleTypes
+    sensorModuleTypes,
+    SensorModuleType
 };
