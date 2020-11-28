@@ -1,5 +1,10 @@
 import { Coordinate, CoordinateType, CoordinateValueType } from '../coordinate';
-import { SensorModuleType, sensorModuleTypes, sensors as newSensors } from '../sensor';
+import {
+    SensorModuleType,
+    sensorModuleTypes,
+    sensors as newSensors,
+    SensorsType
+} from '../sensor';
 import { Robot } from '.';
 
 /**
@@ -15,7 +20,7 @@ class VRobot extends Robot<
     number,
     CoordinateType<number>,
     CoordinateValueType<number>,
-    SensorModuleType<number[], number>,
+    SensorsType,
     SensorModuleType<number[], number>
 > {
     protected _created: Date;
@@ -25,13 +30,9 @@ class VRobot extends Robot<
      * Robot constructor
      * @param {number} id robot id
      * @param {CoordinateType<number>} coordinates coordinates
-     * @param {TSensor} sensors sensor
+     * @param {SensorsType} sensors sensor array
      */
-    constructor(
-        id: number,
-        coordinates?: CoordinateType<number>,
-        sensors?: SensorModuleType<number[], number>
-    ) {
+    constructor(id: number, coordinates?: CoordinateType<number>, sensors?: SensorsType) {
         super(
             id,
             coordinates === undefined ? new Coordinate(id, 0, 0, 0) : coordinates,
@@ -42,21 +43,16 @@ class VRobot extends Robot<
     }
 
     /**
-     * method for getting coordinates
-     * @returns {CoordinateValueType<number>}
+     * get coordinates
+     * @returns {CoordinateValueType<number>} coordinate values
      */
     get coordinates(): CoordinateValueType<number> {
         return this._coordinates.values;
     }
 
     /**
-     * method for setting coordinates
-     * if z is given, the z coordinate is updated only if the z coordinate is assigned to an initial value at the instance creation only.
-     * if not, only the other coordinates are updated accordingly
-     * @param {number} heading heading coordinate
-     * @param {number} x x coordinate
-     * @param {number} y y coordinate
-     * @param {number} z z coordinate
+     * set coordinates
+     * @param {CoordinateValueType<number>} CoordinateValueType<T> coordinate values
      */
     setCoordinates(coordinates: CoordinateValueType<number>): void {
         const { heading, x, y } = coordinates;
