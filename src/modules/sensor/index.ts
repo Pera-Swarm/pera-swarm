@@ -41,6 +41,15 @@ type SensorReadingType<T, TValueType> = {
 };
 
 /**
+ * @type SensorReadingTypes
+ */
+type SensorReadingTypes =
+    | SensorReadingType<number, number>
+    | SensorReadingType<number, number[]>
+    | SensorReadingType<string, string>
+    | SensorReadingType<string, string[]>;
+
+/**
  * @type SensorModuleType
  */
 type SensorModuleType<TColor, TDistance> = {
@@ -48,6 +57,22 @@ type SensorModuleType<TColor, TDistance> = {
     distance: SensorType<TDistance>;
     updated: number;
 };
+
+/**
+ * @interface SensorReading
+ */
+interface SensorReading<T> {
+    [key: string]: T;
+}
+
+/**
+ * @interface SensorModuleType
+ */
+interface SensorModuleInterface<TColor, TDistance> {
+    color: SensorReading<SensorType<TColor>>;
+    distance: SensorReading<SensorType<TDistance>>;
+    updated: number;
+}
 
 /**
  * @type SensorsType
@@ -135,10 +160,7 @@ function sensors(id: number): SensorsType {
     };
 }
 
-enum sensorModuleTypes {
-    color = 'color',
-    distance = 'distance'
-}
+const sensorModuleTypes: string[] = ['color', 'distance'];
 
 export {
     sensors,
@@ -148,5 +170,9 @@ export {
     SensorValueType,
     SensorArrayValueType,
     SensorModuleType,
+    SensorModuleInterface,
+    SensorReading,
+    SensorReadingType,
+    SensorReadingTypes,
     sensorModuleTypes
 };

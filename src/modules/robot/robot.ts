@@ -1,9 +1,10 @@
 import { Coordinate, CoordinateType, CoordinateValueType } from '../coordinate';
 import {
+    SensorModuleInterface,
     SensorModuleType,
-    sensorModuleTypes,
     sensors as newSensors,
-    SensorsType
+    SensorsType,
+    SensorReadingType,
 } from '../sensor';
 import { Robot } from '.';
 
@@ -60,42 +61,56 @@ class VRobot extends Robot<
         this._updated = Date.now();
     }
 
-    get sensors(): SensorModuleType<number[], number> {
-        throw new Error('Method not implemented.');
-    }
-
-    setSensors(sensors: SensorModuleType<number[], number>): void {
-        throw new Error('Method not implemented.');
-    }
-
     /**
-     * method for getting all the sensor readings
-     * @returns {object} all sensor readings with sensor type as the key and readings as the value
+     * get sensor array
+     * @returns {SensorsType} sensor values
      */
-    getSensorReadings = () => {
-        var result = {};
-        for (const key in this._sensors) {
-            if (this._sensors.hasOwnProperty(key)) {
-                if (sensorModuleTypes.color === key) {
-                    result[key] = this._sensors[key].getReading();
-                }
-            }
-        }
-        return result;
-    };
+    get sensors(): SensorsType {
+        return this._sensors;
+    }
 
     /**
-     * method for getting the sensor readings by the given sensor type
+     * set sensor array
+     * @param {SensorModuleType<number[], number>} sensors sensors array
+     */
+    setSensors(sensors: SensorModuleType<number[], number>): void {
+        const { color, distance } = sensors;
+        this._sensors.color = color;
+        this._sensors.distance = distance;
+        this._sensors.updated = Date.now();
+        this._updated = Date.now();
+    }
+
+    /**
+     * get all the sensor readings
+     * @returns {SensorModuleType<number[], number>} all sensor readings with sensor type as the key and readings as the value
+     */
+    // getSensorReadings<T, K extends keyof T>(o: T, sensorTypes: K[]): T[K][] {
+    getSensorReadings<K extends keyof SensorModuleInterface<number[], number>>(
+        sensorTypes: K[]
+    ): SensorsType[K][] {
+        return sensorTypes.map((n) => this._sensors[n]);
+    }
+
+    /**
+     * get the sensor readings by the given sensor type
      * @param {string} type sensor type
      * @returns {object} sensor reading object
      */
-    getReadingsBySensor = (type: string) => {
-        if (typeof type === 'string') {
-            return this._sensors[type].getReading();
+    getReadingsBySensor<K extends keyof SensorModuleInterface<number[], number>>(
+        type: K
+    ): SensorReadingType<number, number> | SensorReadingType<number, number[]> | -1 {
+        if (typeof type === 'string' && type !== 'updated') {
+            Object.keys(this._sensors).forEach((key) => {
+                if (type === key) {
+                    return this._sensors[type];
+                }
+            });
+            return -1;
         } else {
             throw new TypeError('invalid sensor type');
         }
-    };
+    }
 }
 
 export { VRobot, RobotType };

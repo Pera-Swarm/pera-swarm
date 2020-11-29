@@ -1,3 +1,5 @@
+import { SensorsType } from '../..';
+
 /**
  * @class Robot
  * @classdesc Generic Robot class prototype
@@ -37,7 +39,7 @@ abstract class Robot<
 
     abstract get coordinates(): TCoordinateValueType;
     abstract setCoordinates(coordinates: TCoordinateValueType): void;
-    abstract get sensors(): TSensorsValueType;
+    abstract get sensors(): SensorsType;
     abstract setSensors(sensors: TSensorsValueType): void;
 }
 
