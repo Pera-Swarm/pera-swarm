@@ -41,6 +41,9 @@
         "url": "https://github.com/Pera-Swarm/pera-swarm/issues"
     },
     "homepage": "https://github.com/Pera-Swarm/pera-swarm#readme",
+    "publishConfig": {
+        "access": "public"
+    },
     "devDependencies": {
         "@types/chai": "^4.2.14",
         "@types/mocha": "^8.0.4",
