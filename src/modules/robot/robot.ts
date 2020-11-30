@@ -1,12 +1,12 @@
-import { Coordinate, CoordinateType, CoordinateValueType } from '../coordinate';
+import { Coordinate, CoordinateType, CoordinateValueType } from '../coordinate/';
 import {
     SensorModuleInterface,
     SensorModuleType,
     sensors as newSensors,
     SensorsType,
-    SensorReadingType,
-} from '../sensor';
-import { Robot } from '.';
+    SensorReadingType
+} from '../sensor/';
+import { Robot } from './';
 
 /**
  * @type RobotType

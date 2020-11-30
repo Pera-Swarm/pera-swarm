@@ -1,4 +1,4 @@
-import { SensorsType } from '../..';
+import { SensorsType } from '../sensor/';
 
 /**
  * @class Robot

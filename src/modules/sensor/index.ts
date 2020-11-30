@@ -1,5 +1,5 @@
-import { ColorSensor } from './color';
-import { DistanceSensor } from './distance';
+import { ColorSensor } from './color/';
+import { DistanceSensor } from './distance/';
 
 /**
  * @type SensorValueType
@@ -176,3 +176,5 @@ export {
     SensorReadingTypes,
     sensorModuleTypes
 };
+export * from './distance/';
+export * from './color/';
