@@ -1,7 +1,7 @@
 /**
  * @type CoordinateValueType
  */
-type CoordinateValueType<TId> = {
+export type CoordinateValueType<TId> = {
     id: TId;
     heading: number;
     x: number;
@@ -11,7 +11,7 @@ type CoordinateValueType<TId> = {
 /**
  * @type CoordinateType
  */
-type CoordinateType<TId> = {
+export type CoordinateType<TId> = {
     id: TId;
     values: CoordinateValueType<TId>;
     reset: Function;
@@ -21,7 +21,7 @@ type CoordinateType<TId> = {
 /**
  * @class Coordinate
  */
-class Coordinate<TId> {
+export class Coordinate<TId> {
     protected _id: TId;
     protected _heading: number;
     protected _x: number;
@@ -78,14 +78,14 @@ class Coordinate<TId> {
 /**
  * @type ValidityType
  */
-type ValidityType = boolean | number;
+export type ValidityType = boolean | number;
 
 /**
  * method for validating a coordinate object.
  * returns true if valid or -1 if not.
  * @param {coordinate} coordinate
  */
-function validateCoordinate<TId>(coordinate: CoordinateType<TId>): ValidityType {
+export function validateCoordinate<TId>(coordinate: CoordinateType<TId>): ValidityType {
     var validity: ValidityType;
     var i: number;
     validity = -1;
@@ -108,12 +108,4 @@ function validateCoordinate<TId>(coordinate: CoordinateType<TId>): ValidityType 
     return validity;
 }
 
-abstract class CoordinateZ<TId> extends Coordinate<TId> {}
-
-export {
-    Coordinate,
-    CoordinateValueType,
-    CoordinateType,
-    CoordinateZ,
-    validateCoordinate
-};
+export class CoordinateZ<TId> extends Coordinate<TId> {}

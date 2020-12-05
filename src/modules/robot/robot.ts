@@ -11,13 +11,13 @@ import { Robot } from './';
 /**
  * @type RobotType
  */
-type RobotType = {};
+export type RobotType = {};
 
 /**
  * @class Robot Representation
  * @classdesc Virtual Robot Specific implementation
  */
-class VRobot extends Robot<
+export class VRobot extends Robot<
     number,
     CoordinateType<number>,
     CoordinateValueType<number>,
@@ -112,5 +112,3 @@ class VRobot extends Robot<
         }
     }
 }
-
-export { VRobot, RobotType };

@@ -3,12 +3,12 @@ import { Sensor, SensorArrayValueType } from '../';
 /**
  * @type ColorSensorValueType
  */
-type ColorSensorValueType = SensorArrayValueType<number>;
+export type ColorSensorValueType = SensorArrayValueType<number>;
 
 /**
  * @type ColorSensorType
  */
-type ColorSensorType = {
+export type ColorSensorType = {
     id: number;
     value: ColorSensorValueType;
     updated: number;
@@ -17,7 +17,7 @@ type ColorSensorType = {
 /**
  * @class ColorSensor
  */
-class ColorSensor<T> extends Sensor<T, ColorSensorValueType> {
+export class ColorSensor<T> extends Sensor<T, ColorSensorValueType> {
     /**
      * ColorSensor constructor
      * @param {T} id robot id
@@ -45,5 +45,3 @@ class ColorSensor<T> extends Sensor<T, ColorSensorValueType> {
         return this.value;
     };
 }
-
-export { ColorSensor, ColorSensorValueType, ColorSensorType };

@@ -3,12 +3,12 @@ import { Sensor, SensorValueType } from '../';
 /**
  * @type DistanceSensorValueType
  */
-type DistanceSensorValueType = SensorValueType<number>;
+export type DistanceSensorValueType = SensorValueType<number>;
 
 /**
  * @type DistanceSensorType
  */
-type DistanceSensorType = {
+export type DistanceSensorType = {
     id: number;
     value: DistanceSensorValueType;
     updated: number;
@@ -17,7 +17,7 @@ type DistanceSensorType = {
 /**
  * @class DistanceSensor
  */
-class DistanceSensor extends Sensor<number, DistanceSensorValueType> {
+export class DistanceSensor extends Sensor<number, DistanceSensorValueType> {
     /**
      * DistanceSensor constructor
      * @param {number} id robot id
@@ -45,5 +45,3 @@ class DistanceSensor extends Sensor<number, DistanceSensorValueType> {
         return this.value;
     };
 }
-
-export { DistanceSensor, DistanceSensorType, DistanceSensorValueType };

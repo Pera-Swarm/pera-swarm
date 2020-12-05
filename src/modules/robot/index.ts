@@ -4,7 +4,7 @@ import { SensorsType } from '../sensor/';
  * @class Robot
  * @classdesc Generic Robot class prototype
  */
-abstract class Robot<
+export abstract class Robot<
     TId,
     TCoordinate,
     TCoordinateValueType,
@@ -44,4 +44,3 @@ abstract class Robot<
 }
 
 export * from './robot';
-export { Robot };

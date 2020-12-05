@@ -4,17 +4,17 @@ import { DistanceSensor } from './distance/';
 /**
  * @type SensorValueType
  */
-type SensorValueType<T> = T;
+export type SensorValueType<T> = T;
 
 /**
  * @type SensorArrayValueType
  */
-type SensorArrayValueType<T> = T[];
+export type SensorArrayValueType<T> = T[];
 
 /**
  * @type ValueType
  */
-type ValueType =
+export type ValueType =
     | SensorValueType<number>
     | SensorValueType<string>
     | SensorArrayValueType<number>
@@ -23,7 +23,7 @@ type ValueType =
 /**
  * @type SensorType
  */
-type SensorType<T> = {
+export type SensorType<T> = {
     id: T;
     value: ValueType;
     updated: number;
@@ -34,7 +34,7 @@ type SensorType<T> = {
 /**
  * @type SensorReadingType
  */
-type SensorReadingType<T, TValueType> = {
+export type SensorReadingType<T, TValueType> = {
     id: T;
     value: TValueType;
     updated: number;
@@ -43,7 +43,7 @@ type SensorReadingType<T, TValueType> = {
 /**
  * @type SensorReadingTypes
  */
-type SensorReadingTypes =
+export type SensorReadingTypes =
     | SensorReadingType<number, number>
     | SensorReadingType<number, number[]>
     | SensorReadingType<string, string>
@@ -52,7 +52,7 @@ type SensorReadingTypes =
 /**
  * @type SensorModuleType
  */
-type SensorModuleType<TColor, TDistance> = {
+export type SensorModuleType<TColor, TDistance> = {
     color: SensorType<TColor>;
     distance: SensorType<TDistance>;
     updated: number;
@@ -61,14 +61,14 @@ type SensorModuleType<TColor, TDistance> = {
 /**
  * @interface SensorReading
  */
-interface SensorReading<T> {
+export interface SensorReading<T> {
     [key: string]: T;
 }
 
 /**
  * @interface SensorModuleType
  */
-interface SensorModuleInterface<TColor, TDistance> {
+export interface SensorModuleInterface<TColor, TDistance> {
     color: SensorReading<SensorType<TColor>>;
     distance: SensorReading<SensorType<TDistance>>;
     updated: number;
@@ -77,7 +77,7 @@ interface SensorModuleInterface<TColor, TDistance> {
 /**
  * @type SensorsType
  */
-type SensorsType =
+export type SensorsType =
     | SensorModuleType<number, number>
     | SensorModuleType<number[], number>
     | SensorModuleType<string, number>
@@ -87,7 +87,7 @@ type SensorsType =
  * @abstract
  * @class Sensor
  */
-abstract class Sensor<TId, TValueType = ValueType> {
+export abstract class Sensor<TId, TValueType = ValueType> {
     protected _id: TId;
     protected _value: TValueType;
     protected _updated: number;
@@ -151,7 +151,7 @@ abstract class Sensor<TId, TValueType = ValueType> {
  * method for creating the sensor array
  * @param {number} id robot id
  */
-function sensors(id: number): SensorsType {
+export function sensors(id: number): SensorsType {
     if (id === undefined) throw new TypeError('id unspecified');
     return {
         color: new ColorSensor(id),
@@ -160,21 +160,7 @@ function sensors(id: number): SensorsType {
     };
 }
 
-const sensorModuleTypes: string[] = ['color', 'distance'];
+export const sensorModuleTypes: string[] = ['color', 'distance'];
 
-export {
-    sensors,
-    Sensor,
-    SensorType,
-    SensorsType,
-    SensorValueType,
-    SensorArrayValueType,
-    SensorModuleType,
-    SensorModuleInterface,
-    SensorReading,
-    SensorReadingType,
-    SensorReadingTypes,
-    sensorModuleTypes
-};
 export * from './distance/';
 export * from './color/';
