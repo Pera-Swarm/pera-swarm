@@ -3,6 +3,7 @@
     "version": "1.0.1",
     "description": "A generalized, efficient, and flexible JavaScript library for creating swarm robotics simulators.",
     "main": "index.js",
+    "types": "lib",
     "files": [
         "lib",
         "index.js"
