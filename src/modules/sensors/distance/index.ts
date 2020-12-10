@@ -1,14 +1,15 @@
-import { Sensor, SensorValueType } from '../';
+/// <reference path="../index.ts" />
+import { Sensor } from '../';
 
 /**
  * @type DistanceSensorValueType
  */
-export type DistanceSensorValueType = SensorValueType<number>;
+export type DistanceSensorValueType = number;
 
 /**
- * @type DistanceSensorType
+ * @interface DistanceSensorType
  */
-export type DistanceSensorType = {
+export interface DistanceSensorType {
     id: number;
     value: DistanceSensorValueType;
     updated: number;
