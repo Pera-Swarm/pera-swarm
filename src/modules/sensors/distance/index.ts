@@ -13,7 +13,7 @@ export interface DistanceSensorType {
     id: number;
     value: DistanceSensorValueType;
     updated: number;
-};
+}
 
 /**
  * @class DistanceSensor
@@ -22,7 +22,7 @@ export class DistanceSensor extends Sensor<number, DistanceSensorValueType> {
     /**
      * DistanceSensor constructor
      * @param {number} id robot id
-     * @param {DistanceSensorValueType} value distance sensor reading
+     * @param {DistanceSensorValueType} value initial distance sensor reading
      */
     constructor(id: number, value?: DistanceSensorValueType) {
         super(id, value === undefined ? 0 : value);

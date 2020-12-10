@@ -8,10 +8,7 @@ export interface ColorSensorType {
     id: number;
     value: number[];
     updated: number;
-};
-
-console.log(Sensor);
-
+}
 
 /**
  * @class ColorSensor

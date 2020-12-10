@@ -6,7 +6,7 @@ export interface CoordinateValueInt<TId> {
     heading: number;
     x: number;
     y: number;
-};
+}
 
 /**
  * @class Coordinate

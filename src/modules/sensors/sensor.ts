@@ -1,10 +1,28 @@
 /// <reference path="./index.ts" />
-import { ColorSensor, DistanceSensor } from './'
+import { ColorSensor, DistanceSensor } from './';
 
 /**
  * @type SensorValueType
  */
 export type SensorValueType = number | string | number[] | string[];
+
+/**
+ * @type SensorReadingTypes
+ */
+export type SensorReadingTypes =
+    | SensorReadingInt<number, number>
+    | SensorReadingInt<number, number[]>
+    | SensorReadingInt<string, string>
+    | SensorReadingInt<string, string[]>;
+
+/**
+ * @type SensorsType
+ */
+export type SensorsType<TId> =
+    | SensorModuleType<TId, number, number>
+    | SensorModuleType<TId, number[], number>
+    | SensorModuleType<TId, string, number>
+    | SensorModuleType<TId, string[], number>;
 
 /**
  * @interface SensorReading
@@ -20,12 +38,7 @@ export interface SensorReadingInt<TId, TValueType> {
     id: TId;
     value: TValueType;
     updated: number;
-};
-
-/**
- * @type SensorReadingTypes
- */
-export type SensorReadingTypes = SensorReadingInt<number, number> | SensorReadingInt<number, number[]> | SensorReadingInt<string, string> | SensorReadingInt<string, string[]>;
+}
 
 /**
  * @interface SensorModuleType
@@ -34,7 +47,7 @@ export interface SensorModuleType<TId, TColor, TDistance> {
     color: Sensor<TId, TColor>;
     distance: Sensor<TId, TDistance>;
     updated: number;
-};
+}
 
 /**
  * @interface SensorModuleType
@@ -44,15 +57,6 @@ export interface SensorModuleInterface<TId, TColor, TDistance> {
     distance: SensorReadingInt<TId, TDistance>;
     updated: number;
 }
-
-/**
- * @type SensorsType
- */
-export type SensorsType<TId> =
-    | SensorModuleType<TId, number, number>
-    | SensorModuleType<TId, number[], number>
-    | SensorModuleType<TId, string, number>
-    | SensorModuleType<TId, string[], number>;
 
 /**
  * @abstract
