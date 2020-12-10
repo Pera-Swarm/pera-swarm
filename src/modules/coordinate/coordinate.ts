@@ -1,21 +1,11 @@
 /**
- * @type CoordinateValueType
+ * @interface CoordinateValueInt
  */
-export type CoordinateValueType<TId> = {
+export interface CoordinateValueInt<TId> {
     id: TId;
     heading: number;
     x: number;
     y: number;
-};
-
-/**
- * @type CoordinateType
- */
-export type CoordinateType<TId> = {
-    id: TId;
-    values: CoordinateValueType<TId>;
-    reset: Function;
-    setCoordinates: Function;
 };
 
 /**
@@ -44,7 +34,7 @@ export class Coordinate<TId> {
     /**
      * the coordinate values
      */
-    get values(): CoordinateValueType<TId> {
+    get values(): CoordinateValueInt<TId> {
         return {
             id: this._id,
             heading: this._heading,
@@ -85,21 +75,21 @@ export type ValidityType = boolean | number;
  * returns true if valid or -1 if not.
  * @param {coordinate} coordinate
  */
-export function validateCoordinate<TId>(coordinate: CoordinateType<TId>): ValidityType {
+export function validateCoordinate<TId>(coordinate: Coordinate<TId>): ValidityType {
     var validity: ValidityType;
     var i: number;
     validity = -1;
     i = 0;
-    if (Object.prototype.hasOwnProperty.call(coordinate, 'id')) {
+    if (Object.prototype.hasOwnProperty.call(coordinate, '_id')) {
         i += 1;
     }
-    if (Object.prototype.hasOwnProperty.call(coordinate, 'heading')) {
+    if (Object.prototype.hasOwnProperty.call(coordinate, '_heading')) {
         i += 1;
     }
-    if (Object.prototype.hasOwnProperty.call(coordinate, 'x')) {
+    if (Object.prototype.hasOwnProperty.call(coordinate, '_x')) {
         i += 1;
     }
-    if (Object.prototype.hasOwnProperty.call(coordinate, 'y')) {
+    if (Object.prototype.hasOwnProperty.call(coordinate, '_y')) {
         i += 1;
     }
     if (i === 4) {
