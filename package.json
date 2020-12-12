@@ -17,7 +17,7 @@
         "dev": "tsc --watch",
         "format": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml)\"",
         "test": "mocha -r  ts-node/register './__tests__/**/*test.js'",
-        "test:watch": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\": \"CommonJS\" }' mocha --watch --recursive './__tests__/**/*test.js' ts-node/register"
+        "test:watch": "mocha --watch --recursive './__tests__/**/*test.js' ts-node/register"
     },
     "repository": {
         "type": "git",

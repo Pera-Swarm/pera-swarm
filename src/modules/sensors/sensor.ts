@@ -1,4 +1,3 @@
-/// <reference path="./index.ts" />
 import { ColorSensor, DistanceSensor } from './';
 
 /**

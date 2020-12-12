@@ -1,4 +1,3 @@
-/// <reference path="../index.ts" />
 import { Sensor } from '../index';
 
 /**

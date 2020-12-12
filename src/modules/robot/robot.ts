@@ -1,4 +1,3 @@
-/// <reference path="./index.ts" />
 import { Coordinate, CoordinateValueInt } from '../coordinate/';
 import {
     SensorModuleInterface,
