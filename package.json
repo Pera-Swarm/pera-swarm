@@ -16,7 +16,7 @@
         "build": "tsc",
         "dev": "tsc --watch",
         "format": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml)\"",
-        "test": "mocha -r  './__tests__/**/*test.js'",
+        "test": "mocha --recursive './__tests__/**/*test.js'",
         "test:watch": "mocha --watch --recursive './__tests__/**/*test.js'"
     },
     "repository": {
