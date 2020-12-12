@@ -35,7 +35,7 @@ const coordinate = new Coordinate(1);
 
 console.log(coordinate.id);
 console.log(coordinate.values);
-console.log(validateCoordinate(coo));
+console.log(validateCoordinate(coordinate));
 coordinate.reset();
 
 // Sample Color Sensor with an id of 1
