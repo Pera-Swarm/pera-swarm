@@ -1,17 +1,54 @@
-import { Coordinate, CoordinateType, CoordinateValueType } from '../coordinate/';
+/// <reference path="./index.ts" />
+import { Coordinate, CoordinateValueInt } from '../coordinate/';
 import {
     SensorModuleInterface,
     SensorModuleType,
     sensors as newSensors,
-    SensorsType,
-    SensorReadingType
-} from '../sensor/';
-import { Robot } from './';
+    SensorsType
+} from '../sensors/';
 
 /**
- * @type RobotType
+ * @class Robot
+ * @classdesc Generic Robot class prototype
  */
-export type RobotType = {};
+export abstract class Robot<
+    TId,
+    TCoordinate,
+    TCoordinateValueType,
+    TSensors,
+    TSensorsValueType
+> {
+    protected _id: TId;
+    protected _coordinates: TCoordinate;
+    protected _sensors: TSensors;
+    protected _updated: number;
+
+    constructor(id: TId, coordinates: TCoordinate, sensors: TSensors) {
+        this._id = id;
+        this._coordinates = coordinates;
+        this._sensors = sensors;
+        this._updated = Date.now();
+    }
+
+    /**
+     * the robot id
+     */
+    get id() {
+        return this._id;
+    }
+
+    /**
+     * the robot updated
+     */
+    get updated() {
+        return this._updated;
+    }
+
+    abstract get coordinates(): TCoordinateValueType;
+    abstract setCoordinates(coordinates: TCoordinateValueType): void;
+    abstract get sensors(): TSensors;
+    abstract setSensors(sensors: TSensorsValueType): void;
+}
 
 /**
  * @class Robot Representation
@@ -19,10 +56,10 @@ export type RobotType = {};
  */
 export class VRobot extends Robot<
     number,
-    CoordinateType<number>,
-    CoordinateValueType<number>,
-    SensorsType,
-    SensorModuleType<number[], number>
+    Coordinate<number>,
+    CoordinateValueInt<number>,
+    SensorsType<number>,
+    SensorModuleType<number, number[], number>
 > {
     protected _created: Date;
     protected _timestamp: number;
@@ -30,10 +67,14 @@ export class VRobot extends Robot<
     /**
      * Robot constructor
      * @param {number} id robot id
-     * @param {CoordinateType<number>} coordinates coordinates
-     * @param {SensorsType} sensors sensor array
+     * @param {Coordinate<number>} coordinates coordinates
+     * @param {Sensors} sensors sensor array
      */
-    constructor(id: number, coordinates?: CoordinateType<number>, sensors?: SensorsType) {
+    constructor(
+        id: number,
+        coordinates?: Coordinate<number>,
+        sensors?: SensorsType<number>
+    ) {
         super(
             id,
             coordinates === undefined ? new Coordinate(id, 0, 0, 0) : coordinates,
@@ -45,17 +86,17 @@ export class VRobot extends Robot<
 
     /**
      * get coordinates
-     * @returns {CoordinateValueType<number>} coordinate values
+     * @returns {CoordinateValueInt<number>} coordinate values
      */
-    get coordinates(): CoordinateValueType<number> {
+    get coordinates(): CoordinateValueInt<number> {
         return this._coordinates.values;
     }
 
     /**
      * set coordinates
-     * @param {CoordinateValueType<number>} CoordinateValueType<T> coordinate values
+     * @param {CoordinateValueInt<number>} CoordinateValueInt<T> coordinate values
      */
-    setCoordinates(coordinates: CoordinateValueType<number>): void {
+    setCoordinates(coordinates: CoordinateValueInt<number>): void {
         const { heading, x, y } = coordinates;
         this._coordinates.setCoordinates(heading, x, y);
         this._updated = Date.now();
@@ -63,17 +104,17 @@ export class VRobot extends Robot<
 
     /**
      * get sensor array
-     * @returns {SensorsType} sensor values
+     * @returns {SensorsType<number>} sensor values
      */
-    get sensors(): SensorsType {
+    get sensors(): SensorsType<number> {
         return this._sensors;
     }
 
     /**
      * set sensor array
-     * @param {SensorModuleType<number[], number>} sensors sensors array
+     * @param {SensorModuleType<number, number[], number>} sensors sensors array
      */
-    setSensors(sensors: SensorModuleType<number[], number>): void {
+    setSensors(sensors: SensorModuleType<number, number[], number>): void {
         const { color, distance } = sensors;
         this._sensors.color = color;
         this._sensors.distance = distance;
@@ -83,32 +124,23 @@ export class VRobot extends Robot<
 
     /**
      * get all the sensor readings
-     * @returns {SensorModuleType<number[], number>} all sensor readings with sensor type as the key and readings as the value
+     * @param {K[]}
+     * @returns {SensorsType<number>} all sensor readings with sensor type as the key and readings as the value
      */
-    // getSensorReadings<T, K extends keyof T>(o: T, sensorTypes: K[]): T[K][] {
-    getSensorReadings<K extends keyof SensorModuleInterface<number[], number>>(
+    getSensorReadings<K extends keyof SensorModuleInterface<number, number[], number>>(
         sensorTypes: K[]
-    ): SensorsType[K][] {
-        return sensorTypes.map((n) => this._sensors[n]);
-    }
-
-    /**
-     * get the sensor readings by the given sensor type
-     * @param {string} type sensor type
-     * @returns {object} sensor reading object
-     */
-    getReadingsBySensor<K extends keyof SensorModuleInterface<number[], number>>(
-        type: K
-    ): SensorReadingType<number, number> | SensorReadingType<number, number[]> | -1 {
-        if (typeof type === 'string' && type !== 'updated') {
-            Object.keys(this._sensors).forEach((key) => {
-                if (type === key) {
-                    return this._sensors[type];
+    ): SensorsType<number>[K][] {
+        if (sensorTypes !== undefined) {
+            var result: SensorsType<number>[K][];
+            result = [];
+            sensorTypes.forEach((s) => {
+                if (this._sensors[s] !== undefined) {
+                    result.push(this._sensors[s]);
                 }
             });
-            return -1;
+            return result;
         } else {
-            throw new TypeError('invalid sensor type');
+            throw new TypeError('invalid sensor types');
         }
     }
 }
