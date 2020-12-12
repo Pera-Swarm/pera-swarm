@@ -44,7 +44,7 @@ jobs:
 
     publish-gpr:
         name: 🚀 github publish
-        needs: build
+        needs: publish-npm
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
