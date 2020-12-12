@@ -89,7 +89,7 @@ export abstract class Sensor<TId, TValueType> {
      * the coordinate updated
      */
     get updated() {
-        return this._id;
+        return this._updated;
     }
 
     /**

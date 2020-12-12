@@ -110,6 +110,22 @@ export class VRobot extends Robot<
     }
 
     /**
+     * get date
+     * @returns {Date} date values
+     */
+    get created(): Date {
+        return this._created;
+    }
+
+    /**
+     * get timestamp
+     * @returns {number} timestamp values
+     */
+    get timestamp(): number {
+        return this._timestamp;
+    }
+
+    /**
      * set sensor array
      * @param {SensorModuleType<number, number[], number>} sensors sensors array
      */
@@ -141,5 +157,14 @@ export class VRobot extends Robot<
         } else {
             throw new TypeError('invalid sensor types');
         }
+    }
+
+    /**
+     * return the updated timestamp
+     * @returns updated timestamp
+     */
+    updateHeartbeat(): number {
+        this._updated = Date.now();
+        return this._updated;
     }
 }
