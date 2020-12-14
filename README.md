@@ -16,7 +16,7 @@ You can create generalized entity instances: "VRobot"
 
 ##### index.js
 ```
-const { VRobot, Coordinate, validateCoordinate, ColorSensor } = require('pera-swarm');
+const { VRobot, Coordinate, validateCoordinateType, SimpleLocalizationSystem, ColorSensor } = require('pera-swarm');
 
 // Sample Robot instance with an id of 1
 const robot = new VRobot(1);
@@ -35,7 +35,7 @@ const coordinate = new Coordinate(1);
 
 console.log(coordinate.id);
 console.log(coordinate.values);
-console.log(validateCoordinate(coordinate));
+console.log(validateCoordinateType(coordinate));
 coordinate.reset();
 
 // Sample Color Sensor with an id of 1
@@ -45,6 +45,32 @@ console.log(colorSensor);
 console.log(colorSensor.id);
 console.log(colorSensor.value);
 console.log(colorSensor.getReading());
+
+// Sample Localization System
+const loc_system = new SimpleLocalizationSystem();
+
+const SAMPLE_COORDINATE_1 = {
+    id: 1,
+    heading: 1,
+    x: -1,
+    y: 2
+};
+
+const SAMPLE_COORDINATE_2 = {
+    id: 2,
+    heading: 2,
+    x: -3,
+    y: 9
+};
+
+// Call only update for adding or updating the coordinates list
+// supports for both single objects and arrays of CoordinateValueType
+loc_system.update([SAMPLE_COORDINATE_1, SAMPLE_COORDINATE_2]);
+loc_system.update({ ...SAMPLE_COORDINATE_2, y: 10 });
+console.log(loc_system.ids);
+console.log(loc_system.coordinates);
+console.log(loc_system.idExists(1));
+console.log(loc_system.size);
 ```
 
 ### Documentation
