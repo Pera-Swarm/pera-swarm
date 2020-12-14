@@ -72,10 +72,10 @@ export type ValidityType = boolean | number;
 
 /**
  * method for validating a coordinate object.
- * returns true if valid or -1 if not.
- * @param {coordinate} coordinate
+ * @param {Coordinate} coordinate
+ * @returns {ValidityType} true if valid or -1 if not.
  */
-export function validateCoordinate<TId>(coordinate: Coordinate<TId>): ValidityType {
+export function validateCoordinateType<TId>(coordinate: Coordinate<TId>): ValidityType {
     var validity: ValidityType;
     var i: number;
     validity = -1;
@@ -90,6 +90,36 @@ export function validateCoordinate<TId>(coordinate: Coordinate<TId>): ValidityTy
         i += 1;
     }
     if (Object.prototype.hasOwnProperty.call(coordinate, '_y')) {
+        i += 1;
+    }
+    if (i === 4) {
+        validity = true;
+    }
+    return validity;
+}
+
+/**
+ * method for validating a coordinate value object.
+ * @param {CoordinateValueInt} coordinate
+ * @returns {ValidityType} true if valid or -1 if not.
+ */
+export function validateCoordinateValueType<TId>(
+    coordinate: CoordinateValueInt<TId>
+): ValidityType {
+    var validity: ValidityType;
+    var i: number;
+    validity = -1;
+    i = 0;
+    if (Object.prototype.hasOwnProperty.call(coordinate, 'id')) {
+        i += 1;
+    }
+    if (Object.prototype.hasOwnProperty.call(coordinate, 'heading')) {
+        i += 1;
+    }
+    if (Object.prototype.hasOwnProperty.call(coordinate, 'x')) {
+        i += 1;
+    }
+    if (Object.prototype.hasOwnProperty.call(coordinate, 'y')) {
         i += 1;
     }
     if (i === 4) {
