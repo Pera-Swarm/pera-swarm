@@ -57,6 +57,15 @@ export abstract class AbstractCommunication<
         b = b - 180;
         return round(b, 2);
     };
+
+    /**
+     * method for finding whether a given distance value is within the max distance range
+     * @param {number} dist distance value
+     * @returns {boolean} whether a given distance is below the max distance or not
+     */
+    distanceCheck = (dist: number): boolean => {
+        return dist <= this._maxDistance;
+    };
 }
 
 export abstract class Communication extends AbstractCommunication<
