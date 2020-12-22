@@ -3,7 +3,6 @@ var chai = require('chai');
 var expect = chai.expect;
 
 const { VRobot, sensorModuleTypes, Coordinate } = require('../');
-// const sensors = require('../../modules/sensors');
 
 var r;
 var updated;
