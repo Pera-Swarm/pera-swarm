@@ -4,12 +4,7 @@ import { Robots } from '../robots';
 import { Communication } from './index';
 
 export class SimpleCommunication extends Communication {
-    constructor(
-        robots: Robots<number>,
-        mqttClient: Client,
-        maxDistance = 100,
-        debug = false
-    ) {
+    constructor(robots: Robots, mqttClient: Client, maxDistance = 100, debug = false) {
         super(robots, mqttClient, maxDistance, debug);
     }
 
@@ -29,7 +24,7 @@ export class SimpleCommunication extends Communication {
 
         allCoordinates.forEach(
             (coordinate: CoordinateValueInt<number>, index?: number) => {
-                if (coordinate.id != thisCoordinate.id) {
+                if (thisCoordinate !== -1 && coordinate.id !== thisCoordinate.id) {
                     const withinRange = this.distanceCheck(
                         this._getDistance(thisCoordinate, coordinate)
                     );

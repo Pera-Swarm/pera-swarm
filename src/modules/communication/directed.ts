@@ -8,7 +8,7 @@ export class DirectedCommunication extends Communication {
     protected _angleThreshold: number;
 
     constructor(
-        robots: Robots<number>,
+        robots: Robots,
         mqttClient: MqttClient,
         maxDistance: number,
         angleThreshold: number = 30,
@@ -31,31 +31,33 @@ export class DirectedCommunication extends Communication {
         if (robotId === undefined) throw new TypeError('robotId unspecified');
         if (message === undefined) throw new TypeError('message unspecified');
 
-        const robots = this._robots.getCoordinatesAll();
-        const thisRobot = this._robots.getCoordinatesById(robotId);
+        const allCoordinates = this._robots.getCoordinatesAll();
+        const thisCoordinate = this._robots.getCoordinatesById(Number(robotId));
         var receivers = 0;
 
-        robots.forEach((coordinate: CoordinateValueInt<number>, index: number) => {
-            if (coordinate.id != thisRobot.id) {
-                const distCheck = this.distanceCheck(
-                    this._getDistance(thisRobot, coordinate)
-                );
-                const angleCheck = this.angleCheck(
-                    thisRobot.heading,
-                    this._getAngle(thisRobot, coordinate)
-                );
-
-                if (distCheck && angleCheck) {
-                    // within the distance range & angle threshold, so send the messaage
-                    receivers++;
-                    if (this._debug) console.log(`robot #${coordinate.id}: pass`);
-                    this._mqttClient.publish(
-                        `v1/communication/${coordinate.id}`,
-                        message
+        allCoordinates.forEach(
+            (coordinate: CoordinateValueInt<number>, index: number) => {
+                if (thisCoordinate !== -1 && coordinate.id != thisCoordinate.id) {
+                    const distCheck = this.distanceCheck(
+                        this._getDistance(thisCoordinate, coordinate)
                     );
+                    const angleCheck = this.angleCheck(
+                        thisCoordinate.heading,
+                        this._getAngle(thisCoordinate, coordinate)
+                    );
+
+                    if (distCheck && angleCheck) {
+                        // within the distance range & angle threshold, so send the messaage
+                        receivers++;
+                        if (this._debug) console.log(`robot #${coordinate.id}: pass`);
+                        this._mqttClient.publish(
+                            `v1/communication/${coordinate.id}`,
+                            message
+                        );
+                    }
                 }
             }
-        });
+        );
 
         if (callback != undefined) callback({ receivers: receivers });
     };
@@ -66,7 +68,7 @@ export class DirectedCommunication extends Communication {
      * @param {number} angle angle value
      * @returns {boolean} the verification of angle
      */
-    angleCheck = (heading: number, angle: number) => {
+    angleCheck = (heading: number, angle: number): boolean => {
         // Get the absolute difference between robot heading and target robot's absolute angle
         var difference = (angle - heading) % 360;
         if (difference <= -180) difference += 360;

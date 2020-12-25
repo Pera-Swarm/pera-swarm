@@ -24,10 +24,10 @@ export abstract class AbstractCommunication<
     _mqttClient: MqttClient;
     _maxDistance: number;
     _debug: boolean;
-    _robots: Robots<TId>;
+    _robots: Robots;
 
     constructor(
-        robots: Robots<TId>,
+        robots: Robots,
         mqttClient: MqttClient,
         maxDistance = 100,
         debug = false
