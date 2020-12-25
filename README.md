@@ -1,4 +1,4 @@
-# pera-swarm [![npm (scoped)](https://img.shields.io/npm/v/@pera-swarm/pera-swarm.svg)](https://github.com/Pera-Swarm/pera-swarm/) [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Pera-Swarm/pera-swarm/%F0%9F%9A%80%20Release)](https://github.com/Pera-Swarm/pera-swarm/releases) [![GitHub issues](https://img.shields.io/github/issues/Pera-Swarm/pera-swarm)](https://github.com/Pera-Swarm/pera-swarm/issues)
+# pera-swarm [![npm (scoped)](https://img.shields.io/npm/v/pera-swarm.svg)](https://github.com/Pera-Swarm/pera-swarm/) [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Pera-Swarm/pera-swarm/%F0%9F%9A%80%20Release)](https://github.com/Pera-Swarm/pera-swarm/releases) [![GitHub issues](https://img.shields.io/github/issues/Pera-Swarm/pera-swarm)](https://github.com/Pera-Swarm/pera-swarm/issues)
 A generalized, efficient, and flexible JavaScript library for building swarm robotics simulators.
 
 ## Overview
