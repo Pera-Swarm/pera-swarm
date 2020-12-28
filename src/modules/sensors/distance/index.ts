@@ -45,3 +45,5 @@ export class DistanceSensor extends Sensor<number, DistanceSensorValueType> {
         return this.value;
     };
 }
+
+export * from './distance';
