@@ -1,6 +1,7 @@
 const { abs, round, cos, sin } = require('mathjs');
 import { MqttClient } from 'mqtt';
 import { DistanceSensor, DistanceSensorValueType } from '.';
+import { normalizeAngle } from '../../../helpers';
 import { VRobot } from '../../robot';
 
 /* ------------------------------------------------------
@@ -15,27 +16,32 @@ P3  L2  P4
 Axises: ↑ Y, → X
 ------------------------------------------------------ */
 
-export class DistanceSensorImpl extends DistanceSensor {
+export class DistanceSensorModule extends DistanceSensor {
     protected _arena: any;
     protected _mqttClient: MqttClient;
+    protected _publishTopic: string;
 
     constructor(
         id: number,
         arena: any,
         mqttClient: MqttClient,
+        publishTopic: string = '',
         value?: DistanceSensorValueType
     ) {
         super(id, value);
         this._arena = arena;
         this._mqttClient = mqttClient;
+        this._publishTopic = publishTopic;
     }
 
-    getReadings = (robot: VRobot, callback: Function) => {
+    getReadings = (robot: VRobot, suffix: string, callback: Function) => {
         const { x, y, heading } = robot.coordinates;
         robot.updateHeartbeat();
         console.log(x, y, heading);
         var dist = round(this._getBorderDistance(x, y, heading) * 10) / 10;
-        this._mqttClient.publish(`v1/sensor/distance/${robot.id}`, String(dist));
+        if (this._publishTopic !== '') {
+            this._mqttClient.publish(`${this._publishTopic}/${suffix}`, String(dist));
+        }
         this.setReading(dist);
         if (callback != undefined) callback(dist);
     };
@@ -48,17 +54,10 @@ export class DistanceSensorImpl extends DistanceSensor {
 
     // Internal use only -------------------------------------------------------
 
-    _normalizedAngle = (a: number) => {
-        let b = (a + 180) % 360;
-        if (b <= 0) b += 360;
-        b = b - 180;
-        return b;
-    };
-
     _getBorderDistance = (x: number, y: number, heading: number) => {
         //console.log( this._arena);
         const { xMin, xMax, yMin, yMax } = this._arena;
-        var normalizedHeading: number = this._normalizedAngle(heading);
+        var normalizedHeading: number = normalizeAngle(heading);
 
         var p1 = { x: xMax, y: yMin }; // lower right
         var p2 = { x: xMax, y: yMax }; // upper right

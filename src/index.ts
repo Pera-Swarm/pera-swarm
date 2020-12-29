@@ -1,3 +1,4 @@
+export * from './helpers/index';
 export * from './modules/coordinate/';
 export * from './modules/localization/';
 export * from './modules/sensors';

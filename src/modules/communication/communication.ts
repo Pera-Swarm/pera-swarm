@@ -1,5 +1,6 @@
 import { sqrt, pow, round, atan2, boolean } from 'mathjs';
 import { MqttClient } from 'mqtt';
+import { normalizeAngle } from '../../helpers';
 import { Coordinate, CoordinateValueInt } from '../coordinate';
 import { Robots } from '../robots';
 import { SensorsType, SensorValueType } from '../sensors';
@@ -11,7 +12,6 @@ export interface CommunicationInterface {
 
     broadcast: Function;
     // ------------- Internal use only -------------
-    normalizedAngle: Function;
 }
 
 export abstract class AbstractCommunication<
@@ -51,7 +51,7 @@ export abstract class AbstractCommunication<
      * @param {number} a angle value
      * @returns the normalized angle
      */
-    normalizedAngle = (a: number): number => {
+    normalizeAngle = (a: number): number => {
         let b = (Number(a) + 180) % 360;
         if (b <= 0) b += 360;
         b = b - 180;
@@ -107,7 +107,7 @@ export abstract class Communication extends AbstractCommunication<
         ) {
             const xDiff = to.x - from.x;
             const yDiff = to.y - from.y;
-            return this.normalizedAngle((atan2(yDiff, xDiff) * 180) / Math.PI);
+            return normalizeAngle((atan2(yDiff, xDiff) * 180) / Math.PI);
         } else {
             throw new TypeError('Both parameters require coordinate values');
         }
