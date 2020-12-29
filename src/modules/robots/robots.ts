@@ -1,6 +1,5 @@
-import { VRobot as Robot, Coordinate, DistanceSensor } from '../../';
+import { VRobot as Robot, Coordinate } from '../../';
 import { CoordinateValueInt } from '../coordinate';
-import { SensorModuleType } from '../sensors';
 
 export type RobotListType = {
     [k: number]: Robot;
@@ -80,6 +79,18 @@ export class Robots extends AbstractRobots<number> {
     }
 
     /**
+     * robot builder method
+     * @description you should override this method if you're intending to use custom Robot classes
+     * @param {number} id robot id
+     * @param {number} heading heading coordinate
+     * @param {number} x x coordinate
+     * @param {number} y y coordinate
+     */
+    robotBuilder = (id: number, heading: number, x: number, y: number) => {
+        return new Robot(id, new Coordinate(id, heading, x, y));
+    };
+
+    /**
      * method for adding a robot to the robotList
      * @param {number} id robot id
      * @param {number} heading heading coordinate
@@ -99,7 +110,7 @@ export class Robots extends AbstractRobots<number> {
         // only add a robot if the id doesn't exist
         if (this.isExistsRobot(id) === false) {
             // robot doesn't exists
-            this._robotList[id] = new Robot(id, new Coordinate(id, heading, x, y));
+            this._robotList[id] = this.robotBuilder(id, heading, x, y);
             this._size += 1;
             return id;
         } else {
