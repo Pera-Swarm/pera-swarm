@@ -7,17 +7,15 @@ import {
 } from '../sensors/';
 
 /**
- * @class AbstractCoordinateRobot
- * @classdesc Generic Abstract Robot class prototype with Coordinate
+ * @class AbstractRobot
+ * @classdesc Generic Abstract Robot class prototype
  */
-export abstract class AbstractCoordinateRobot<TId, TCoordinate, TCoordinateValueType> {
+export abstract class AbstractRobot<TId> {
     protected _id: TId;
-    protected _coordinates: TCoordinate;
     protected _updated: number;
 
-    constructor(id: TId, coordinates: TCoordinate) {
+    constructor(id: TId) {
         this._id = id;
-        this._coordinates = coordinates;
         this._updated = Date.now();
     }
 
@@ -36,13 +34,30 @@ export abstract class AbstractCoordinateRobot<TId, TCoordinate, TCoordinateValue
     }
 
     /**
-     * method for updating the heartbeat of the robot
-     * @returns {Date} updated datetime value
+     * return the updated timestamp
+     * @returns updated timestamp
      */
-    updateHeartbeat = () => {
+    updateHeartbeat(): number {
         this._updated = Date.now();
         return this._updated;
-    };
+    }
+}
+
+/**
+ * @class AbstractCoordinateRobot
+ * @classdesc Generic Abstract Robot class prototype with Coordinate
+ */
+export abstract class AbstractCoordinateRobot<
+    TId,
+    TCoordinate,
+    TCoordinateValueType
+> extends AbstractRobot<TId> {
+    protected _coordinates: TCoordinate;
+
+    constructor(id: TId, coordinates: TCoordinate) {
+        super(id);
+        this._coordinates = coordinates;
+    }
 
     abstract get coordinates(): TCoordinateValueType;
     abstract setCoordinates(coordinates: TCoordinateValueType): void;
@@ -52,29 +67,16 @@ export abstract class AbstractCoordinateRobot<TId, TCoordinate, TCoordinateValue
  * @class AbstractSensorRobot
  * @classdesc Generic Abstract Robot class prototype with Sensor
  */
-export abstract class AbstractSensorRobot<TId, TSensors, TSensorsValueType> {
-    protected _id: TId;
+export abstract class AbstractSensorRobot<
+    TId,
+    TSensors,
+    TSensorsValueType
+> extends AbstractRobot<TId> {
     protected _sensors: TSensors;
-    protected _updated: number;
 
     constructor(id: TId, sensors: TSensors) {
-        this._id = id;
+        super(id);
         this._sensors = sensors;
-        this._updated = Date.now();
-    }
-
-    /**
-     * the robot id
-     */
-    get id() {
-        return this._id;
-    }
-
-    /**
-     * the robot updated
-     */
-    get updated() {
-        return this._updated;
     }
 
     abstract get sensors(): TSensors;
@@ -91,31 +93,14 @@ export abstract class Robot<
     TCoordinateValueType,
     TSensors,
     TSensorsValueType
-> {
-    protected _id: TId;
+> extends AbstractRobot<TId> {
     protected _coordinates: TCoordinate;
     protected _sensors: TSensors;
-    protected _updated: number;
 
     constructor(id: TId, coordinates: TCoordinate, sensors: TSensors) {
-        this._id = id;
+        super(id);
         this._coordinates = coordinates;
         this._sensors = sensors;
-        this._updated = Date.now();
-    }
-
-    /**
-     * the robot id
-     */
-    get id() {
-        return this._id;
-    }
-
-    /**
-     * the robot updated
-     */
-    get updated() {
-        return this._updated;
     }
 
     abstract get coordinates(): TCoordinateValueType;
@@ -232,14 +217,5 @@ export class VRobot extends Robot<
         } else {
             throw new TypeError('invalid sensor types');
         }
-    }
-
-    /**
-     * return the updated timestamp
-     * @returns updated timestamp
-     */
-    updateHeartbeat(): number {
-        this._updated = Date.now();
-        return this._updated;
     }
 }

@@ -80,13 +80,13 @@ export class Robots extends AbstractRobots<number> {
 
     /**
      * robot builder method
-     * @description you should override this method if you're intending to use custom Robot classes
+     * @description you should override this method only if you're intending to use custom Robot classes
      * @param {number} id robot id
      * @param {number} heading heading coordinate
      * @param {number} x x coordinate
      * @param {number} y y coordinate
      */
-    robotBuilder = (id: number, heading: number, x: number, y: number) => {
+    robotBuilder = (id: number, heading: number, x: number, y: number): any => {
         return new Robot(id, new Coordinate(id, heading, x, y));
     };
 
