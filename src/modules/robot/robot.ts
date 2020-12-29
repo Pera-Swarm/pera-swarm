@@ -7,6 +7,81 @@ import {
 } from '../sensors/';
 
 /**
+ * @class AbstractCoordinateRobot
+ * @classdesc Generic Abstract Robot class prototype with Coordinate
+ */
+export abstract class AbstractCoordinateRobot<TId, TCoordinate, TCoordinateValueType> {
+    protected _id: TId;
+    protected _coordinates: TCoordinate;
+    protected _updated: number;
+
+    constructor(id: TId, coordinates: TCoordinate) {
+        this._id = id;
+        this._coordinates = coordinates;
+        this._updated = Date.now();
+    }
+
+    /**
+     * the robot id
+     */
+    get id() {
+        return this._id;
+    }
+
+    /**
+     * the robot updated
+     */
+    get updated() {
+        return this._updated;
+    }
+
+    /**
+     * method for updating the heartbeat of the robot
+     * @returns {Date} updated datetime value
+     */
+    updateHeartbeat = () => {
+        this._updated = Date.now();
+        return this._updated;
+    };
+
+    abstract get coordinates(): TCoordinateValueType;
+    abstract setCoordinates(coordinates: TCoordinateValueType): void;
+}
+
+/**
+ * @class AbstractSensorRobot
+ * @classdesc Generic Abstract Robot class prototype with Sensor
+ */
+export abstract class AbstractSensorRobot<TId, TSensors, TSensorsValueType> {
+    protected _id: TId;
+    protected _sensors: TSensors;
+    protected _updated: number;
+
+    constructor(id: TId, sensors: TSensors) {
+        this._id = id;
+        this._sensors = sensors;
+        this._updated = Date.now();
+    }
+
+    /**
+     * the robot id
+     */
+    get id() {
+        return this._id;
+    }
+
+    /**
+     * the robot updated
+     */
+    get updated() {
+        return this._updated;
+    }
+
+    abstract get sensors(): TSensors;
+    abstract setSensors(sensors: TSensorsValueType): void;
+}
+
+/**
  * @class Robot
  * @classdesc Generic Robot class prototype
  */
