@@ -25,6 +25,7 @@ export abstract class AbstractCylinder extends AbstractObject {
     };
 }
 
+// This should be in cylinder.js after pera-swarm library migration
 export class Cylinder extends AbstractCylinder {
     constructor(
         radius: number,

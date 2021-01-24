@@ -38,6 +38,7 @@ export abstract class AbstractWall extends AbstractObject {
     };
 }
 
+// This should be in wall.js after pera-swarm library migration
 export class Wall extends AbstractWall {
     constructor(
         width: number,
