@@ -250,7 +250,7 @@ export class Robots extends AbstractRobots {
     prune = (interval: any, callback: any) => {
         if (interval === undefined) throw new TypeError('interval unspecified');
 
-        for (var id in this._robotList) {
+        for (let id in this._robotList) {
             if (this.isAliveRobot(id, interval) == false) {
                 this.removeRobot(Number(id), callback);
             }

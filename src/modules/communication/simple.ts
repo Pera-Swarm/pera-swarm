@@ -20,7 +20,7 @@ export class SimpleCommunication extends Communication {
 
         const allCoordinates = this._robots.getCoordinatesAll();
         const thisCoordinate = this._robots.getCoordinatesById(robotId);
-        var receivers = 0;
+        let receivers = 0;
 
         allCoordinates.forEach(
             (coordinate: CoordinateValueInt<number>, index?: number) => {

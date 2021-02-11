@@ -1,13 +1,13 @@
-var assert = require('chai').assert;
-var chai = require('chai');
-var expect = chai.expect;
+let assert = require('chai').assert;
+let chai = require('chai');
+let expect = chai.expect;
 
 const { VRobot, sensorModuleTypes, Coordinate } = require('../');
 
-var r;
-var updated;
-var created;
-var timestamp;
+let r;
+let updated;
+let created;
+let timestamp;
 
 const SAMPLE_ID_1 = 1;
 const SAMPLE_ID_2 = 2;

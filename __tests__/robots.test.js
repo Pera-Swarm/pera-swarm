@@ -1,12 +1,12 @@
-// var assert = require('chai').assert;
-// var chai = require('chai');
-// var expect = chai.expect;
+// let assert = require('chai').assert;
+// let chai = require('chai');
+// let expect = chai.expect;
 
 // const { VRobot: Robot } = require('../lib');
 // const { Robots } = require('./robots');
 
-// var r = new Robots();
-// var updated;
+// let r = new Robots();
+// let updated;
 
 // const SAMPLE_ID_1 = 1;
 // const SAMPLE_ID_2 = 2;
@@ -87,7 +87,7 @@
 
 //     describe('#size', function () {
 //         it('should return the size of the robot robotList', function () {
-//             var size = r.size;
+//             let size = r.size;
 //             assert.typeOf(size, 'number');
 //             expect(size).to.equal(1);
 //             r.addRobot(SAMPLE_ID_1);
@@ -125,7 +125,7 @@
 //     describe('#findRobotById()', function () {
 //         it('should return a robot by id or -1', function () {
 //             expect(r.findRobotById).to.throw(TypeError);
-//             var robot = r.findRobotById(SAMPLE_ID_1);
+//             let robot = r.findRobotById(SAMPLE_ID_1);
 //             // empty
 //             expect(robot).not.to.equal(-1);
 //             assert.typeOf(robot, 'object');
@@ -161,7 +161,7 @@
 //         it('should return coordinates of a robot by id if exists', function () {
 //             expect(r.getCoordinatesById).to.throw(TypeError);
 //             // ROBOT 1
-//             var coordinates = r.getCoordinatesById(SAMPLE_ID_1);
+//             let coordinates = r.getCoordinatesById(SAMPLE_ID_1);
 //             assert.typeOf(coordinates, 'object');
 //             expect(coordinates).to.haveOwnProperty('id').and.equal(SAMPLE_ID_1);
 //             expect(coordinates).to.haveOwnProperty('heading').and.equal(INITIAL_HEADING);
@@ -183,7 +183,7 @@
 //             // ROBOT 0
 //             expect(r.getCoordinateStringById(0)).to.equal(-1);
 //             // ROBOT 1
-//             var coordinateString = r.getCoordinateStringById(SAMPLE_ID_1);
+//             let coordinateString = r.getCoordinateStringById(SAMPLE_ID_1);
 //             assert.typeOf(coordinateString, 'string');
 //             expect(coordinateString).to.equal(SAMPLE_COORDINATE_STRING_1);
 //             // ROBOT 2
@@ -197,7 +197,7 @@
 //     describe('#getCoordinatesAll()', function () {
 //         it('should return coordinates of all the existing robots', function () {
 //             // 1 item
-//             var coordinates = r.getCoordinatesAll();
+//             let coordinates = r.getCoordinatesAll();
 //             assert.typeOf(coordinates, 'array');
 //             expect(coordinates.length).to.equal(1);
 //             expect(coordinates[0]).to.haveOwnProperty('id').and.equal(SAMPLE_ID_1);

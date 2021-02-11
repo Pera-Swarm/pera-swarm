@@ -1,10 +1,10 @@
-var assert = require('assert');
-var chai = require('chai');
-var expect = chai.expect;
+let assert = require('assert');
+let chai = require('chai');
+let expect = chai.expect;
 
 const { Coordinate, Localization } = require('../');
 
-var l;
+let l;
 
 const SAMPLE_COORDINATE = {
     id: 1,

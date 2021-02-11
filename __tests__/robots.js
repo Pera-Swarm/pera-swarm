@@ -1,8 +1,8 @@
 'use strict';
-var __extends =
+let __extends =
     (this && this.__extends) ||
     (function () {
-        var extendStatics = function (d, b) {
+        let extendStatics = function (d, b) {
             extendStatics =
                 Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array &&
@@ -10,7 +10,7 @@ var __extends =
                         d.__proto__ = b;
                     }) ||
                 function (d, b) {
-                    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+                    for (let p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
                 };
             return extendStatics(d, b);
         };
@@ -24,12 +24,12 @@ var __extends =
         };
     })();
 exports.__esModule = true;
-var __1 = require('../');
+let __1 = require('../');
 /**
  * @class Robot Representation
  * @classdesc representing the specific robot level functionality in the Swarm Server
  */
-var FinalRobot = /** @class */ (function (_super) {
+let FinalRobot = /** @class */ (function (_super) {
     __extends(FinalRobot, _super);
     /**
      * Robot constructor
@@ -39,7 +39,7 @@ var FinalRobot = /** @class */ (function (_super) {
      * @param {number} y y coordinate
      */
     function FinalRobot(id, heading, x, y) {
-        var _this = _super.call(this, id, new __1.Coordinate(id, heading, x, y)) || this;
+        let _this = _super.call(this, id, new __1.Coordinate(id, heading, x, y)) || this;
         /**
          * method for get a data by its key
          * @param {number} key key for the data
@@ -76,7 +76,7 @@ var FinalRobot = /** @class */ (function (_super) {
          * @param {number} y y coordinate
          */
         _this.setCoordinates = function (coordinate) {
-            var heading = coordinate.heading,
+            let heading = coordinate.heading,
                 x = coordinate.x,
                 y = coordinate.y;
             _this._coordinates.setCoordinates(heading, x, y);
@@ -110,7 +110,7 @@ var FinalRobot = /** @class */ (function (_super) {
          */
         _this.isAlive = function (interval) {
             if (interval === undefined) throw new TypeError('interval unspecified');
-            var seconds = Math.floor((Date.now() - _this.updated) / 1000);
+            let seconds = Math.floor((Date.now() - _this.updated) / 1000);
             return seconds <= interval;
         };
         _this.created = new Date();
@@ -144,7 +144,7 @@ var FinalRobot = /** @class */ (function (_super) {
 exports.FinalRobot = FinalRobot;
 // const { DistanceSensor } = require('../../modules/distanceSensor');
 // Class for representing the robots level functionality
-var Robots = /** @class */ (function (_super) {
+let Robots = /** @class */ (function (_super) {
     __extends(Robots, _super);
     /**
      * Robots constructor
@@ -153,7 +153,7 @@ var Robots = /** @class */ (function (_super) {
         if (debug === void 0) {
             debug = false;
         }
-        var _this = _super.call(this, debug) || this;
+        let _this = _super.call(this, debug) || this;
         _this.robotBuilder = function (id, heading, x, y) {
             return new FinalRobot(id, heading, x, y);
         };
@@ -197,7 +197,7 @@ var Robots = /** @class */ (function (_super) {
         _this.updateCoordinates = function (coordinates) {
             if (coordinates === undefined) throw new TypeError('coordinates unspecified');
             coordinates.forEach(function (item) {
-                var id = item.id,
+                let id = item.id,
                     x = item.x,
                     y = item.y,
                     heading = item.heading;
@@ -218,7 +218,7 @@ var Robots = /** @class */ (function (_super) {
          */
         _this.prune = function (interval, callback) {
             if (interval === undefined) throw new TypeError('interval unspecified');
-            for (var id in _this._robotList) {
+            for (let id in _this._robotList) {
                 if (_this.isAliveRobot(id, interval) == false) {
                     _this.removeRobot(Number(id), callback);
                 }
@@ -231,7 +231,7 @@ var Robots = /** @class */ (function (_super) {
             if (instType === undefined)
                 throw new TypeError('instruction type unspecified');
             if (value === undefined) throw new TypeError('value unspecified');
-            var msg = instType + ' ' + value;
+            let msg = instType + ' ' + value;
             // this.swarm.mqttPublish('v1/robot/msg/broadcast', msg, options);
         };
         _this.changeMode = function (mode, options) {

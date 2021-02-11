@@ -1,11 +1,11 @@
-var assert = require('chai').assert;
-var chai = require('chai');
-var expect = chai.expect;
+let assert = require('chai').assert;
+let chai = require('chai');
+let expect = chai.expect;
 
 const { sensors, ColorSensor, DistanceSensor } = require('../');
 
-var s;
-var updated;
+let s;
+let updated;
 
 const SAMPLE_ID = 1;
 
