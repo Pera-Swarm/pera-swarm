@@ -65,30 +65,40 @@ export abstract class Sensor<TId, TValueType> {
     protected _id: TId;
     protected _value: TValueType;
     protected _updated: number;
+    protected _publishTopic: string;
 
-    constructor(id: TId, value?: TValueType) {
+    constructor(id: TId, value: TValueType, publishTopic: string = '') {
         this._id = id;
         if (value !== undefined) {
             this._value = value;
         } else {
-            throw new Error(
+            console.error(
                 'Invalid argument. value argument must be one of number, number[] string or string[] types.'
             );
+            this._value = value;
         }
         this._updated = Date.now();
+        this._publishTopic = publishTopic;
     }
 
     /**
      * the coordinate id
      */
-    get id() {
+    get id(): TId {
         return this._id;
+    }
+
+    /**
+     * the mqtt publish topic
+     */
+    get publishTopic(): string {
+        return this._publishTopic;
     }
 
     /**
      * the coordinate updated
      */
-    get updated() {
+    get updated(): number {
         return this._updated;
     }
 
@@ -108,8 +118,23 @@ export abstract class Sensor<TId, TValueType> {
         };
     }
 
+    abstract publish: Function;
+
     /**
      * method for setting sesnor readings
+     * @param {string} mqtt publish topic value
+     */
+    setPublishTopic(topic: string) {
+        if (topic === undefined) {
+            throw new TypeError('publish topic is not specified');
+        } else {
+            this._publishTopic = topic;
+        }
+    }
+
+    /**
+     * method for setting sesnor readings
+     * @param {TValueType} value sensor reading value
      */
     setReading(value: TValueType) {
         if (value === undefined) {
