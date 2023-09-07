@@ -1,12 +1,13 @@
 const { abs, round, cos, sin, atan2, sqrt, pow } = require('mathjs');
 
-import { normalizeAngle } from 'pera-swarm/lib';
+import { normalizeAngle } from '../../../helpers';
 import {
     AbstractBox,
     ObjectCoordinate,
     validateObjectCoordinate,
     VisualizeType
 } from '../abstractObstacles';
+import { Reality } from '../../../types';
 
 export type WallPropType = {
     width: number;
@@ -30,7 +31,7 @@ export class Wall extends AbstractBox {
         originY: number,
         depth: number = 2,
         color: string = '#404040',
-        reality: 'R' | 'V',
+        reality: Reality,
         debug = false
     ) {
         super(
