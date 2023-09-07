@@ -1,62 +1,97 @@
 import { v4 as uuid } from 'uuid';
+import { Reality } from '../../../types';
 
 export type ObjectCoordinate = {
     x: number;
     y: number;
 };
 
+export type ObjectRotation = {
+    x: number;
+    y: number;
+    z: number;
+};
+
 export type Appearance = {
     color: string;
+};
+
+export type MaterialType = {
+    type: string;
+    properties: Appearance;
+};
+
+export type VisualizeType = {
+    id: string;
+    reality: string;
+    geometry: any;
+    material: MaterialType;
+    position: ObjectCoordinate;
+    rotation: ObjectRotation;
 };
 
 /**
  * @class Obstacle Object
  * @classdesc Obstacle Object Representation
  */
-export abstract class AbstractObject {
+export abstract class AbstractObstacle {
     protected _id: string;
-    protected _height: number;
-    protected _center: ObjectCoordinate;
     protected _type: string;
+    protected _name: string;
+
+    protected _position: ObjectCoordinate; /* center coordinate of the Obstacle */
+    protected _color: string; /* color of the Obstacle */
+
     protected _geometryType: string;
-    protected _color: string;
     protected _materialType: string;
+
     protected _debug: boolean;
     protected _created: Date;
     protected _updated: number;
 
-    constructor(height: number, center: ObjectCoordinate, debug: boolean = false) {
+    protected _reality: string;
+
+    protected constructor(
+        position: ObjectCoordinate,
+        reality: Reality,
+        debug: boolean = false
+    ) {
         this._id = uuid();
-        this._height = height;
-        this._center = center;
+        this._position = position;
+
+        // TODO: @luk3Sky, can you impelement this using name provided in env.config
+        this._name = '';
+
         this._debug = debug;
         this._type = 'Object';
         this._geometryType = 'Geometry';
-        this._color = '#505050';
+        this._color = '#404040';
         this._materialType = 'MeshStandardMaterial';
         this._created = new Date();
         this._updated = Date.now();
+
+        this._reality = reality;
     }
 
     /**
      * get id
      */
     get id(): string {
-        return this._id;
+        return `${this._id} (${this._type})`;
     }
 
     /**
-     * get height
+     * get name
      */
-    get height(): number {
-        return this._height;
+    get name(): string {
+        return `${this._name}`;
     }
 
     /**
-     * get center coordinate
+     * get position coordinate
      */
-    get center(): ObjectCoordinate {
-        return this._center;
+    get position(): ObjectCoordinate {
+        return this._position;
     }
 
     /**
@@ -101,6 +136,13 @@ export abstract class AbstractObject {
      */
     get materialType(): string {
         return this._materialType;
+    }
+
+    /**
+     * get reality (V or R)
+     */
+    get reality(): string {
+        return this._reality;
     }
 
     /**
@@ -154,6 +196,11 @@ export abstract class AbstractObject {
      * @returns {number} distance from the given object to this obstacle
      */
     abstract getDistance: Function;
+
+    /**
+     * @returns {string} color of the obstacle in format #RRGGBB
+     */
+    abstract getColor: Function;
 }
 
 /**

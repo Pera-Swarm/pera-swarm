@@ -35,15 +35,16 @@ export class DistanceSensor extends Sensor<number, DistanceSensorValueType> {
     }
 
     /**
+     * method for publishing the sensor readings
+     */
+    publish = (value: number, suffix: string = '') => {};
+
+    /**
      * method for setting the distance sensor data and get back the updated data
      * @param {DistanceSensorValueType} value distance sensor value
      */
     syncReading = (value: DistanceSensorValueType) => {
         this.setReading(value);
-        // TODO: did some process to sync the value with virtual robots
-        // Currently just echo back the readings
         return this.value;
     };
 }
-
-export * from './distance';
