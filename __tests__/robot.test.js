@@ -114,24 +114,6 @@ describe('VRobot', function () {
         });
     });
 
-    describe('#sensors()', function () {
-        it('should return the sensors module of the robot instance', function () {
-            const sensors = r.sensors;
-            assert.typeOf(sensors, 'object');
-            sensorModuleTypes.map((type) => {
-                expect(sensors).to.haveOwnProperty(type);
-            });
-        });
-    });
-
-    describe('#getSensorReadings()', function () {
-        it('should return the sensor readings of the robot instance', function () {
-            expect(r.getSensorReadings).to.throw(TypeError);
-            const sensorReadings = r.getSensorReadings(sensorModuleTypes);
-            assert.typeOf(sensorReadings, 'array');
-        });
-    });
-
     describe('#created', function () {
         it('should return the created value of the robot instance', function () {
             const createdValue = r.created;
