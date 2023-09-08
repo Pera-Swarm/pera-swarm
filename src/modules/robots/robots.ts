@@ -26,7 +26,7 @@ export abstract class AbstractRobots<TId> {
     }
 
     /**
-     * method for getting the robot robotList
+     * Method for getting the robot robotList
      * @returns {number} the robot instances : are in the list
      */
     get list(): RobotListType {
@@ -34,7 +34,7 @@ export abstract class AbstractRobots<TId> {
     }
 
     /**
-     * method for getting the size of the robot robotList
+     * Method for getting the size of the robot robotList
      * @returns {number} the size of the robot instances : are in the list
      */
     get size(): number {
@@ -84,7 +84,7 @@ export class Robots extends AbstractRobots<number> {
     };
 
     /**
-     * method for adding a robot to the robotList
+     * Method for adding a robot to the robotList
      * @param {number} id robot id
      * @param {number} heading heading coordinate
      * @param {number} x x coordinate
@@ -112,7 +112,7 @@ export class Robots extends AbstractRobots<number> {
     };
 
     /**
-     * method for finding a robot exists in the robotList or not
+     * Method for finding a robot exists in the robotList or not
      * @param {number} id robot id
      * @param {Function} callback a callback function
      * @returns {boolean} true : if it exists with the id
@@ -129,7 +129,7 @@ export class Robots extends AbstractRobots<number> {
     };
 
     /**
-     * method for finding whether a robot exists in the robotList or not
+     * Method for finding whether a robot exists in the robotList or not
      * @param {number} id robot id
      * @returns {boolean} whether a robot exists in the robotList or not
      */
@@ -139,7 +139,7 @@ export class Robots extends AbstractRobots<number> {
     };
 
     /**
-     * method for finding a robot alive or not
+     * Method for finding a robot alive or not
      * @param {number} id robot id
      * @param {number} interval considered time interval
      * @returns {boolean} true : if robot is alive
@@ -155,7 +155,7 @@ export class Robots extends AbstractRobots<number> {
     };
 
     /**
-     * method for finding the robot by id
+     * Method for finding the robot by id
      * @param {number} id robot id
      * @returns {Robot|number} the robot instance : if it exists
      * @returns -1 : if it doesn't exist
@@ -167,7 +167,7 @@ export class Robots extends AbstractRobots<number> {
     };
 
     /**
-     * method for removing the robot by id
+     * Method for removing the robot by id
      * @param {number} id robot id
      * @param {Function} callback a callback function
      * @returns {boolean} true : if successful
@@ -188,7 +188,7 @@ export class Robots extends AbstractRobots<number> {
     };
 
     /**
-     * method for getting the robot coordinates by id
+     * Method for getting the robot coordinates by id
      * @param {number} id robot id
      * @returns {CoordinateValueInt|number} the robot coordinates : if it exists
      * @returns -1 : if it doesn't exist
@@ -202,7 +202,7 @@ export class Robots extends AbstractRobots<number> {
     };
 
     /**
-     * method for getting the coordinates of all robots
+     * Method for getting the coordinates of all robots
      * @returns {Coordinate[]} current robot coordinates : that are existing in the list
      */
     getCoordinatesAll = (): CoordinateValueInt<number>[] => {
@@ -217,13 +217,13 @@ export class Robots extends AbstractRobots<number> {
     };
 
     /**
-     * method for updating the coordinates of the given robots coordinates data
+     * Method for updating the coordinates of the given robots coordinates data
      * @param {Coordinate[]} coordinates coordinate data
      */
     updateCoordinates = (coordinates: CoordinateValueInt<number>[]) => {};
 
     /**
-     * method for updating the coordinates of the given robots coordinates data
+     * Method for updating the coordinates of the given robots coordinates data
      * @param {number} interval the maximum allowed time in 'seconds' for being counted as 'alive' for a robot unit
      * @param {Function} callback a callback function. 'id' will be given as a parameter
      */

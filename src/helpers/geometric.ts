@@ -2,7 +2,7 @@ import { CoordinateValueInt } from '../modules';
 import { atan2, pow, round, sqrt } from 'mathjs';
 
 /**
- * method for normalizing a given angle
+ * Method for normalizing a given angle
  * @param {number} a angle
  */
 export const normalizeAngle = (a: number) => {
@@ -13,7 +13,7 @@ export const normalizeAngle = (a: number) => {
 };
 
 /**
- * method for normalizing a given value according within a range
+ * Method for normalizing a given value according within a range
  * @param {number} value
  * @param {number} minValue
  * @param {number} maxValue
@@ -34,7 +34,7 @@ export const normalizeValueRange = (
 };
 
 /**
- * method for obtaining a normalized angle
+ * Method for obtaining a normalized angle
  * @param {CoordinateValueInt<number>} from
  * @param {CoordinateValueInt<number>} to
  * @returns {number} angle value
@@ -49,7 +49,7 @@ export const getAngle = (
 };
 
 /**
- * method for obtaining the distance between two coordinates
+ * Method for obtaining the distance between two coordinates
  * @param {CoordinateValueInt<number>} from
  * @param {CoordinateValueInt<number>} to
  * @returns {number} distance value
@@ -64,7 +64,7 @@ export const getDistance = (
 };
 
 /**
- * method for obtaining the angle rolerance value
+ * Method for obtaining the angle rolerance value
  * @param {number} dist
  * @param {number} width
  * @returns {number} angle tolerance value

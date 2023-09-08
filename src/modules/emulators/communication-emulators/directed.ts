@@ -4,9 +4,21 @@ import { CoordinateValueInt } from '../../coordinate';
 import { Robots } from '../../robots';
 import { Communication } from './';
 
+/**
+ * @class DirectedCommunication
+ * @classdesc Directed Communication Emulator Representation
+ */
 export class DirectedCommunication extends Communication {
     protected _angleThreshold: number;
 
+    /**
+     * DirectedCommunication constructor 
+     * @param {Robots} robots robots object 
+     * @param {Function} mqttPublish MQTT publish function 
+     * @param {number} maxDistance maximum transmission distance
+     * @param {number} angleThreshold tolerence angle 
+     * @param {boolean} debug 
+     */
     constructor(
         robots: Robots,
         mqttPublish: Function,
@@ -22,10 +34,12 @@ export class DirectedCommunication extends Communication {
     }
 
     /**
-     * broadcast method
-     * @param robotId {TId} robot id
-     * @param message {string} message
-     * @param callback {Function} callback function
+     * Broadcast method
+     * @param {TId} robotId  robot id
+     * @param {string} message message
+     * @param {string} distance message
+     * @param {string} topic  message
+     * @param {Function} callback callback function
      */
     broadcast = (
         robotId: string,
@@ -70,7 +84,7 @@ export class DirectedCommunication extends Communication {
     };
 
     /*
-     * method contains the default subscription topics of the module.
+     * Method contains the default subscription topics of the module.
      * this will be handled by mqtt-router
      */
     defaultSubscriptions = (): Route[] => {
@@ -78,7 +92,7 @@ export class DirectedCommunication extends Communication {
     };
 
     /**
-     * method for checking the given angle value is within the accepted value range
+     * Method for checking the given angle value is within the accepted value range
      * @param {number} heading heading value
      * @param {number} angle angle value
      * @returns {boolean} the verification of angle

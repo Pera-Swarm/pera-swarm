@@ -35,12 +35,12 @@ export class DistanceSensor extends Sensor<number, DistanceSensorValueType> {
     }
 
     /**
-     * method for publishing the sensor readings
+     * Method for publishing the sensor readings
      */
     publish = (value: number, suffix: string = '') => {};
 
     /**
-     * method for setting the distance sensor data and get back the updated data
+     * Method for setting the distance sensor data and get back the updated data
      * @param {DistanceSensorValueType} value distance sensor value
      */
     syncReading = (value: DistanceSensorValueType) => {

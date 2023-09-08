@@ -82,21 +82,21 @@ export abstract class Sensor<TId, TValueType> {
     }
 
     /**
-     * the coordinate id
+     * The coordinate id
      */
     get id(): TId {
         return this._id;
     }
 
     /**
-     * the mqtt publish topic
+     * The mqtt publish topic
      */
     get publishTopic(): string {
         return this._publishTopic;
     }
 
     /**
-     * the coordinate updated
+     * The coordinate updated
      */
     get updated(): number {
         return this._updated;
@@ -108,7 +108,7 @@ export abstract class Sensor<TId, TValueType> {
     abstract get value(): SensorValueType;
 
     /**
-     * method for getting sensor readings
+     * Method for getting sensor readings
      */
     getReading(): SensorReadingInt<TId, TValueType> {
         return {
@@ -121,7 +121,7 @@ export abstract class Sensor<TId, TValueType> {
     abstract publish: Function;
 
     /**
-     * method for setting sesnor readings
+     * Method for setting sesnor readings
      * @param {string} mqtt publish topic value
      */
     setPublishTopic(topic: string) {
@@ -133,7 +133,7 @@ export abstract class Sensor<TId, TValueType> {
     }
 
     /**
-     * method for setting sesnor readings
+     * Method for setting sesnor readings
      * @param {TValueType} value sensor reading value
      */
     setReading(value: TValueType) {
@@ -147,7 +147,7 @@ export abstract class Sensor<TId, TValueType> {
 }
 
 /**
- * method for creating the sensor array
+ * Method for creating the sensor array
  * @param {number} id robot id
  */
 export function sensors(id: number): SensorsType<number> {

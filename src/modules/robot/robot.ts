@@ -20,14 +20,14 @@ export abstract class AbstractRobot<TId> {
     }
 
     /**
-     * the robot id
+     * The robot id
      */
     get id() {
         return this._id;
     }
 
     /**
-     * the robot updated
+     * The robot updated
      */
     get updated() {
         return this._updated;

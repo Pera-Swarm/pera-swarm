@@ -14,7 +14,7 @@ export abstract class AbstractController {
     abstract defaultSubscriptions: Function;
 
     /**
-     * method for publishing the sensor readings
+     * Method for publishing the sensor readings
      * @param {number} value message value
      * @param {string} suffix an optional mqtt topic suffix
      */

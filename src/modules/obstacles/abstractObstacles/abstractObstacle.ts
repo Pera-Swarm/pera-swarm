@@ -74,49 +74,49 @@ export abstract class AbstractObstacle {
     }
 
     /**
-     * get id
+     * Get id
      */
     get id(): string {
         return `${this._id} (${this._type})`;
     }
 
     /**
-     * get name
+     * Get name
      */
     get name(): string {
         return `${this._name}`;
     }
 
     /**
-     * get position coordinate
+     * Get position coordinate
      */
     get position(): ObjectCoordinate {
         return this._position;
     }
 
     /**
-     * get created datetime
+     * Get created datetime
      */
     get created(): Date {
         return this._created;
     }
 
     /**
-     * get updated timestamp
+     * Get updated timestamp
      */
     get updated(): number {
         return this._updated;
     }
 
     /**
-     * get type
+     * Get type
      */
     get type(): string {
         return this._type;
     }
 
     /**
-     * get appearance properties
+     * Get appearance properties
      */
     get appearance(): Appearance {
         return {
@@ -125,28 +125,28 @@ export abstract class AbstractObstacle {
     }
 
     /**
-     * get geometry type
+     * Get geometry type
      */
     get geometryType(): string {
         return this._geometryType;
     }
 
     /**
-     * get material type
+     * Get material type
      */
     get materialType(): string {
         return this._materialType;
     }
 
     /**
-     * get reality (V or R)
+     * Get reality (V or R)
      */
     get reality(): string {
         return this._reality;
     }
 
     /**
-     * set geometry type
+     * Set geometry type
      * @param geometry geometry type
      */
     setGeometry = (geometry: string) => {
@@ -155,7 +155,7 @@ export abstract class AbstractObstacle {
     };
 
     /**
-     * set color
+     * Set color
      * @param color color value
      */
     setColor = (color: string) => {
@@ -164,7 +164,7 @@ export abstract class AbstractObstacle {
     };
 
     /**
-     * set material type
+     * Set material type
      * @param material material type
      */
     setMaterial = (material: string) => {
@@ -183,7 +183,7 @@ export abstract class AbstractObstacle {
     abstract geometric: Function;
 
     /**
-     * an array of properties need to be set in three.js object creation
+     * An array of properties need to be set in three.js object creation
      */
     abstract visualize: Function;
 
@@ -204,7 +204,7 @@ export abstract class AbstractObstacle {
 }
 
 /**
- * method for validating an object coordinate.
+ * Method for validating an object coordinate.
  * @param {Coordinate} coordinate
  * @returns {boolean|-1} true if valid or -1 if not.
  */

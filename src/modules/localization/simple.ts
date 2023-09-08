@@ -36,7 +36,7 @@ export class SimpleLocalizationSystem {
 
     /**
      *
-     * method for checking a given id exists in the ids list.
+     * Method for checking a given id exists in the ids list.
      * @param {number} id robot id
      */
     idExists = (id: number) => {
@@ -66,7 +66,7 @@ export class SimpleLocalizationSystem {
     };
 
     /**
-     * method for adding a coordinate to the coordinates list.
+     * Method for adding a coordinate to the coordinates list.
      * @param {CoordinateValueInt} coordinate coordinate instance
      */
     add = (coordinate: CoordinateValueInt<number>) => {
@@ -77,7 +77,7 @@ export class SimpleLocalizationSystem {
     };
 
     /**
-     * method for updating the coordinates list.
+     * Method for updating the coordinates list.
      * this method will add/update the given coordinates to the localization list.
      * @param {CoordinateValueInt|CoordinateValueInt[]} coordinates
      * supported coordinates types : array, valid_coordinate_object

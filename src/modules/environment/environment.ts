@@ -51,14 +51,14 @@ export abstract class AbstractEnvironment {
     }
 
     /**
-     * config
+     * Config
      */
     get config() {
         return this._config;
     }
 
     /**
-     * obstacle controller
+     * Obstacle controller
      */
     get obstacleController() {
         return this._obstacleController;
@@ -78,8 +78,9 @@ export class Environment extends AbstractEnvironment {
     }
 
     /**
-     * method for reading environment config
+     * Method for reading environment config
      * @param {string} file environment config file path string
+     * @returns {EnvironmentConfig | undefined} config file
      */
     readConfig = (file: string): EnvironmentConfig | undefined => {
         // Read config.json file
@@ -104,7 +105,7 @@ export class Environment extends AbstractEnvironment {
     };
 
     /**
-     * method for updating environment config
+     * Method for updating environment config
      * @param {EnvironmentConfig} config environment config object
      */
     updateConfig = (config: EnvironmentConfig) => {
@@ -115,7 +116,7 @@ export class Environment extends AbstractEnvironment {
     };
 
     /**
-     * method for creating obstacles in the environment according to the config
+     * Method for creating obstacles in the environment according to the config
      * @param {Function} callback callback function
      */
     createObstacles = (callback: Function) => {
@@ -130,7 +131,7 @@ export class Environment extends AbstractEnvironment {
     };
 
     /**
-     * method for obtaining all the obstacles in the environment configuration
+     * Method for obtaining all the obstacles in the environment configuration
      */
     getObstaclesList = (
         reality: ExtendedReality = ExtendedReality.M
@@ -141,7 +142,7 @@ export class Environment extends AbstractEnvironment {
 }
 
 /**
- * method for validating a config object.
+ * Method for validating a config object.
  * @param {EnvironmentConfig|undefined} config
  * @returns {boolean|-1} true if valid or -1 if not.
  */

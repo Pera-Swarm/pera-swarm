@@ -41,7 +41,7 @@ export abstract class AbstractCommunication<
     protected abstract _getAngle: Function;
 
     /**
-     * method for finding whether a given distance value is within the max distance range
+     * Method for finding whether a given distance value is within the max distance range
      * @param {number} dist distance value
      * @returns {boolean} whether a given distance is below the max distance or not
      */

@@ -3,7 +3,19 @@ import { CoordinateValueInt } from '../../coordinate';
 import { Robots } from '../../robots';
 import { Communication } from './index';
 
+/**
+ * @class SimpleCommunication
+ * @classdesc Simple Communication Emulator Representation
+ */
 export class SimpleCommunication extends Communication {
+
+    /**
+     * SimpleCommunication constructor  
+     * @param {Robots} robots robots object 
+     * @param {Function} mqttPublish MQTT publish function 
+     * @param {number} maxDistance maximum transmission distance
+     * @param {boolean} debug 
+     */
     constructor(robots: Robots, mqttPublish: Function, maxDistance = 100, debug = false) {
         super(robots, mqttPublish, maxDistance, debug);
         if (this._debug) {
@@ -12,12 +24,14 @@ export class SimpleCommunication extends Communication {
     }
 
     /**
-     * broadcast method
-     * @param robotId {TId} robot id
-     * @param message {string} message
-     * @param topic {string} topic
-     * @param callback {Function} callback function
+     * Broadcast method
+     * @param {TId} robotId  robot id
+     * @param {string} message message
+     * @param {string} distance message
+     * @param {string} topic  message
+     * @param {Function} callback callback function
      */
+
     broadcast = (
         robotId: number,
         message: string,
@@ -57,7 +71,7 @@ export class SimpleCommunication extends Communication {
     };
 
     /*
-     * method contains the default subscription topics of the module.
+     * Method contains the default subscription topics of the module.
      * this will be handled by mqtt-router
      */
     defaultSubscriptions = (): Route[] => {
