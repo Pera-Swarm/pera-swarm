@@ -30,7 +30,12 @@ export class ColorSensor extends Sensor<number, number[]> {
     }
 
     /**
-     * method for setting the solor sensor data and get back the updated data
+     * Method for publishing the sensor readings
+     */
+    publish = (value: number, suffix: string = '') => {};
+
+    /**
+     * Method for setting the solor sensor data and get back the updated data
      * @param {number[]} values color sensor value
      */
     syncReading = (values: number[]) => {

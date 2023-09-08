@@ -1,5 +1,4 @@
-import { SimpleLocalizationSystem } from '../..';
-import { LocalizationSystem } from '../localization';
+import { SimpleLocalizationSystem, LocalizationSystem } from '../';
 import { AbstractRobots, Robots, RobotListType } from '../robots';
 
 /**
@@ -16,14 +15,14 @@ export abstract class AbstractSwarm<TId> {
     }
 
     /**
-     * localization system
+     * Localization system
      */
     get localization(): LocalizationSystem | any {
         return this._loc_system;
     }
 
     /**
-     * robots
+     * Robots
      */
     get robots(): AbstractRobots<TId> {
         return this._robots;

@@ -49,7 +49,7 @@ export class Localization<TId> {
     }
 
     /**
-     * method for finding the index of a coordinate in the list by id.
+     * Method for finding the index of a coordinate in the list by id.
      * @param {TId} id robot id
      * @returns {number} the index of the coordinate if the id exists, if not -1
      */
@@ -65,7 +65,7 @@ export class Localization<TId> {
     };
 
     /**
-     * method fot getting the coordinates list.
+     * Method fot getting the coordinates list.
      */
     getCoordinates = (): CoordinateValueInt<TId>[] => {
         let coordinates: CoordinateValueInt<TId>[] = [];
@@ -76,7 +76,7 @@ export class Localization<TId> {
     };
 
     /**
-     * method for validating a coordinate.
+     * Method for validating a coordinate.
      * @param {Coordinate} coordinate coordinate instance
      * @returns {ValidityType}
      */
@@ -85,7 +85,7 @@ export class Localization<TId> {
     };
 
     /**
-     * method for validating a coordinate.
+     * Method for validating a coordinate.
      * @param {CoordinateValueInt} coordinate coordinate instance
      * @returns {ValidityType}
      */
@@ -94,7 +94,7 @@ export class Localization<TId> {
     };
 
     /**
-     * method for adding a coordinate to the coordinates list.
+     * Method for adding a coordinate to the coordinates list.
      * @param {CoordinateValueInt} coordinate coordinate instance
      * @returns {ValidityType|undefined}
      */
@@ -116,7 +116,7 @@ export class Localization<TId> {
     };
 
     /**
-     * method for updating the coordinates list.
+     * Method for updating the coordinates list.
      * @param {CoordinateValueInt|CoordinateValueInt[]} coordinates
      * @returns {ValidityType|undefined} return true if the update is successful,
      * if not return -1.
@@ -137,7 +137,7 @@ export class Localization<TId> {
     };
 
     /**
-     * method for updating the coordinates list.
+     * Method for updating the coordinates list.
      * @param {CoordinateValueInt} coordinate coordinate instance
      * @returns {ValidityType|undefined} true if the update is successful,
      * if not return -1.
@@ -149,7 +149,7 @@ export class Localization<TId> {
     };
 
     /**
-     * method for updating the coordinates list.
+     * Method for updating the coordinates list.
      * this method will recursively update the coordinates list.
      * @param {CoordinateValueInt[]} coordinates array of coordinates
      */
@@ -175,7 +175,7 @@ export class Localization<TId> {
     };
 
     /**
-     * method for updating a coordinate in the list by id.
+     * Method for updating a coordinate in the list by id.
      * @param {number} index index of coordinate list
      * @param {CoordinateValueInt} coordinate coordinate instance
      * @returns {ValidityType|undefined} true if the update is successful,

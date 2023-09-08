@@ -25,14 +25,14 @@ export class Coordinate<TId> {
     }
 
     /**
-     * the coordinate id
+     * The coordinate id
      */
     get id(): TId {
         return this._id;
     }
 
     /**
-     * the coordinate values
+     * The coordinate values
      */
     get values(): CoordinateValueInt<TId> {
         return {
@@ -71,7 +71,7 @@ export class Coordinate<TId> {
 export type ValidityType = boolean | number;
 
 /**
- * method for validating a coordinate object.
+ * Method for validating a coordinate object.
  * @param {Coordinate} coordinate
  * @returns {ValidityType} true if valid or -1 if not.
  */
@@ -99,7 +99,7 @@ export function validateCoordinateType<TId>(coordinate: Coordinate<TId>): Validi
 }
 
 /**
- * method for validating a coordinate value object.
+ * Method for validating a coordinate value object.
  * @param {CoordinateValueInt} coordinate
  * @returns {ValidityType} true if valid or -1 if not.
  */
